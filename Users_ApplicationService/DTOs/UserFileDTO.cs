@@ -13,5 +13,6 @@ namespace Users_ApplicationService.DTOs
         public bool IsProfilePhoto { get; set; }
         public bool IsCoverPhoto { get; set; }
         public bool IsCV { get; set; }
+        public byte[]? File { get; set; }
     }
 }

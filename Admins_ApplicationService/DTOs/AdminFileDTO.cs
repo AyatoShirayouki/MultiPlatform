@@ -11,5 +11,6 @@ namespace Admins_ApplicationService.DTOs
     {
         public int AdminId { get; set; }
         public bool IsProfilePhoto { get; set; }
+        public byte[]? File { get; set; }
     }
 }

@@ -23,4 +23,16 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Admins_ApplicationService\Admins_ApplicationService.csproj" />
+    <ProjectReference Include="..\Base\Base.csproj" />
+    <ProjectReference Include="..\Freelance_ApplicationService\Freelance_ApplicationService.csproj" />
+    <ProjectReference Include="..\Users_ApplicationService\Users_ApplicationService.csproj" />
+    <ProjectReference Include="..\Utils\Utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\Freelance\" />
+  </ItemGroup>
+
 </Project>
