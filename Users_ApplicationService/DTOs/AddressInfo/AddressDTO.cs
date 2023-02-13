@@ -14,5 +14,6 @@ namespace Users_ApplicationService.DTOs.AddressInfo
         public int CountryId { get; set; }
         public int RegionId { get; set; }
         public int CityId { get; set; }
+        public string? AddressInfo { get; set; }
     }
 }

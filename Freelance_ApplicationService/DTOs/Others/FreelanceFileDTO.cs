@@ -9,5 +9,6 @@ namespace Freelance_ApplicationService.DTOs.Others
 {
     public class FreelanceFileDTO : BaseFile
     {
+        public byte[]? File { get; set; }
     }
 }

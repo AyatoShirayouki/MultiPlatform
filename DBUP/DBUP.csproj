@@ -24,23 +24,27 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\Script0002 - Bulk_Insert_Regions.sql" />
-    <EmbeddedResource Include="Scripts\Script0001 - Bulk_Insert_Countries.sql" />
-    <EmbeddedResource Include="Scripts\Script0003 - Bulk_Insert_Cities01.sql" />
-    <EmbeddedResource Include="Scripts\Script0004 - Bulk_Insert_Cities02.sql" />
-    <EmbeddedResource Include="Scripts\Script0005 - Bulk_Insert_Cities03.sql" />
-    <EmbeddedResource Include="Scripts\Script0006 - Bulk_Insert_Cities04.sql" />
-    <EmbeddedResource Include="Scripts\Script0007 - Bulk_Insert_Cities05.sql" />
-    <EmbeddedResource Include="Scripts\Script0008 - Bulk_Insert_Cities06.sql" />
-    <EmbeddedResource Include="Scripts\Script0009 - Bulk_Insert_Cities07.sql" />
-    <EmbeddedResource Include="Scripts\Script0010 - Bulk_Insert_Cities08.sql" />
-    <EmbeddedResource Include="Scripts\Script0011 - Bulk_Insert_Cities09.sql" />
-    <EmbeddedResource Include="Scripts\Script0012 - Bulk_Insert_Cities10.sql" />
-    <EmbeddedResource Include="Scripts\Script0013 - Bulk_Insert_Cities11.sql" />
+    <EmbeddedResource Include="Scripts\CountriesAndCities\Script0002 - Bulk_Insert_Regions.sql" />
+    <EmbeddedResource Include="Scripts\CountriesAndCities\Script0001 - Bulk_Insert_Countries.sql" />
+    <EmbeddedResource Include="Scripts\CountriesAndCities\Script0003 - Bulk_Insert_Cities01.sql" />
+    <EmbeddedResource Include="Scripts\CountriesAndCities\Script0004 - Bulk_Insert_Cities02.sql" />
+    <EmbeddedResource Include="Scripts\CountriesAndCities\Script0005 - Bulk_Insert_Cities03.sql" />
+    <EmbeddedResource Include="Scripts\CountriesAndCities\Script0006 - Bulk_Insert_Cities04.sql" />
+    <EmbeddedResource Include="Scripts\CountriesAndCities\Script0007 - Bulk_Insert_Cities05.sql" />
+    <EmbeddedResource Include="Scripts\CountriesAndCities\Script0008 - Bulk_Insert_Cities06.sql" />
+    <EmbeddedResource Include="Scripts\CountriesAndCities\Script0009 - Bulk_Insert_Cities07.sql" />
+    <EmbeddedResource Include="Scripts\CountriesAndCities\Script0010 - Bulk_Insert_Cities08.sql" />
+    <EmbeddedResource Include="Scripts\CountriesAndCities\Script0011 - Bulk_Insert_Cities09.sql" />
+    <EmbeddedResource Include="Scripts\CountriesAndCities\Script0012 - Bulk_Insert_Cities10.sql" />
+    <EmbeddedResource Include="Scripts\CountriesAndCities\Script0013 - Bulk_Insert_Cities11.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="dbup-sqlserver" Version="5.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Utils\Utils.csproj" />
   </ItemGroup>
 
 </Project>

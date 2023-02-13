@@ -34,7 +34,8 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                             Id = item.Id,
                             CountryId = item.CountryId,
                             CityId = item.CityId,
-                            RegionId = item.RegionId
+                            RegionId = item.RegionId,
+                            AddressInfo = item.AddressInfo
                         });
                     }
 
@@ -65,6 +66,7 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                     addressDTO.CountryId = address.CountryId;
                     addressDTO.CityId = address.CityId;
                     addressDTO.RegionId = address.RegionId;
+                    addressDTO.AddressInfo = address.AddressInfo;
 
                     unitOfWork.Commit();
                 }
@@ -94,7 +96,8 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                             Id = address.Id,
                             CountryId = address.CountryId,
                             CityId = address.CityId,
-                            RegionId = address.RegionId
+                            RegionId = address.RegionId,
+                            AddressInfo = address.AddressInfo,
                         };
 
                         addressesDTO.Add(addressDTO);
@@ -128,7 +131,8 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                             Id = address.Id,
                             CountryId = address.CountryId,
                             CityId = address.CityId,
-                            RegionId = address.RegionId
+                            RegionId = address.RegionId,
+                            AddressInfo = address.AddressInfo,
                         };
 
                         addressesDTO.Add(addressDTO);
@@ -162,7 +166,8 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                             Id = address.Id,
                             CountryId = address.CountryId,
                             CityId = address.CityId,
-                            RegionId = address.RegionId
+                            RegionId = address.RegionId, 
+                            AddressInfo = address.AddressInfo
                         };
 
                         addressesDTO.Add(addressDTO);
@@ -206,7 +211,8 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                             {
                                 CountryId = addressDTO.CountryId,
                                 CityId = addressDTO.CityId,
-                                RegionId = addressDTO.RegionId
+                                RegionId = addressDTO.RegionId,
+                                AddressInfo = addressDTO.AddressInfo
                             };
                         }
                         else
@@ -216,7 +222,8 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                                 Id = addressDTO.Id,
                                 CountryId = addressDTO.CountryId,
                                 CityId = addressDTO.CityId,
-                                RegionId = addressDTO.RegionId
+                                RegionId = addressDTO.RegionId,
+                                AddressInfo = addressDTO.AddressInfo
                             };
                         }
                     }

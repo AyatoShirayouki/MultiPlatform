@@ -11,6 +11,8 @@ using Users_ApplicationService.Implementations;
 using Users_ApplicationService.Implementations.AddressInfo;
 using Admins_ApplicationService.Implementations;
 using Users_ApplicationService.DTOs.Authentication;
+using Utils.Encription;
+using Utils.Global;
 
 namespace Users_API.Controllers
 {
@@ -173,8 +175,8 @@ namespace Users_API.Controllers
             {
                 List<UserDTO> users = await UsersManagementService.GetAll();
 
-                UserDTO user = users
-                    .Where(a => a.Email == email && a.Password == password).FirstOrDefault();
+                UserDTO? user = users
+                    .Where(a => a.Email == email && StringCipher.Decrypt(a.Password, GlobalVariables.PasswordEncriptionKey) == password).FirstOrDefault();
 
                 if (user == null)
                 {
@@ -245,6 +247,7 @@ namespace Users_API.Controllers
                 await AddressesManagementService.Save(addressDTO);
 
                 signUpDTO.User.AddressId = addressDTO.Id;
+                signUpDTO.User.Password = StringCipher.Encrypt(signUpDTO.User.Password, GlobalVariables.PasswordEncriptionKey);
                 await UsersManagementService.Save(signUpDTO.User);
 
                 response.Code = 201;

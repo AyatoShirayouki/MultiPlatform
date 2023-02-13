@@ -26,6 +26,9 @@ namespace Users_Data.Entities.AddressInfo
         [Required]
         public int CityId { get; set; }
 
+        [Required]
+        public string? AddressInfo { get; set; }
+
         [ForeignKey("CityId")]
         public City? ParentCity { get; set; }
     }

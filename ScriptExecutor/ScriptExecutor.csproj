@@ -1,0 +1,75 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\MSSql\CountriesRegionsCities\Script0001 - Bulk_Insert_Countries.sql" />
+    <None Remove="Scripts\MSSql\CountriesRegionsCities\Script0002 - Bulk_Insert_Regions.sql" />
+    <None Remove="Scripts\MSSql\CountriesRegionsCities\Script0003 - Bulk_Insert_Cities01.sql" />
+    <None Remove="Scripts\MSSql\CountriesRegionsCities\Script0004 - Bulk_Insert_Cities02.sql" />
+    <None Remove="Scripts\MSSql\CountriesRegionsCities\Script0005 - Bulk_Insert_Cities03.sql" />
+    <None Remove="Scripts\MSSql\CountriesRegionsCities\Script0006 - Bulk_Insert_Cities04.sql" />
+    <None Remove="Scripts\MSSql\CountriesRegionsCities\Script0007 - Bulk_Insert_Cities05.sql" />
+    <None Remove="Scripts\MSSql\CountriesRegionsCities\Script0008 - Bulk_Insert_Cities06.sql" />
+    <None Remove="Scripts\MSSql\CountriesRegionsCities\Script0009 - Bulk_Insert_Cities07.sql" />
+    <None Remove="Scripts\MSSql\CountriesRegionsCities\Script0010 - Bulk_Insert_Cities08.sql" />
+    <None Remove="Scripts\MSSql\CountriesRegionsCities\Script0011 - Bulk_Insert_Cities09.sql" />
+    <None Remove="Scripts\MSSql\CountriesRegionsCities\Script0012 - Bulk_Insert_Cities10.sql" />
+    <None Remove="Scripts\MSSql\CountriesRegionsCities\Script0013 - Bulk_Insert_Cities11.sql" />
+    <None Remove="Scripts\PostgreSQL\CountriesRegionsCities\Script0002 - Bulk_Insert_Regions.sql" />
+    <None Remove="Scripts\PostgreSQL\CountriesRegionsCities\Script0003 - Bulk_Insert_Cities01.sql" />
+    <None Remove="Scripts\PostgreSQL\CountriesRegionsCities\Script0004 - Bulk_Insert_Cities02.sql" />
+    <None Remove="Scripts\PostgreSQL\CountriesRegionsCities\Script0005 - Bulk_Insert_Cities03.sql" />
+    <None Remove="Scripts\PostgreSQL\CountriesRegionsCities\Script0006 - Bulk_Insert_Cities04.sql" />
+    <None Remove="Scripts\PostgreSQL\CountriesRegionsCities\Script0007 - Bulk_Insert_Cities05.sql" />
+    <None Remove="Scripts\PostgreSQL\CountriesRegionsCities\Script0008 - Bulk_Insert_Cities06.sql" />
+    <None Remove="Scripts\PostgreSQL\CountriesRegionsCities\Script0009 - Bulk_Insert_Cities07.sql" />
+    <None Remove="Scripts\PostgreSQL\CountriesRegionsCities\Script0010 - Bulk_Insert_Cities08.sql" />
+    <None Remove="Scripts\PostgreSQL\CountriesRegionsCities\Script0011 - Bulk_Insert_Cities09.sql" />
+    <None Remove="Scripts\PostgreSQL\CountriesRegionsCities\Script0012 - Bulk_Insert_Cities10.sql" />
+    <None Remove="Scripts\PostgreSQL\CountriesRegionsCities\Script0013 - Bulk_Insert_Cities11.sql" />
+    <None Remove="Scripts\PostgreSQL\Script0001 - Bulk_Insert_Countries.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\MSSql\CountriesRegionsCities\Script0001 - Bulk_Insert_Countries.sql" />
+    <EmbeddedResource Include="Scripts\MSSql\CountriesRegionsCities\Script0002 - Bulk_Insert_Regions.sql" />
+    <EmbeddedResource Include="Scripts\MSSql\CountriesRegionsCities\Script0003 - Bulk_Insert_Cities01.sql" />
+    <EmbeddedResource Include="Scripts\MSSql\CountriesRegionsCities\Script0004 - Bulk_Insert_Cities02.sql" />
+    <EmbeddedResource Include="Scripts\MSSql\CountriesRegionsCities\Script0005 - Bulk_Insert_Cities03.sql" />
+    <EmbeddedResource Include="Scripts\MSSql\CountriesRegionsCities\Script0006 - Bulk_Insert_Cities04.sql" />
+    <EmbeddedResource Include="Scripts\MSSql\CountriesRegionsCities\Script0007 - Bulk_Insert_Cities05.sql" />
+    <EmbeddedResource Include="Scripts\MSSql\CountriesRegionsCities\Script0008 - Bulk_Insert_Cities06.sql" />
+    <EmbeddedResource Include="Scripts\MSSql\CountriesRegionsCities\Script0009 - Bulk_Insert_Cities07.sql" />
+    <EmbeddedResource Include="Scripts\MSSql\CountriesRegionsCities\Script0010 - Bulk_Insert_Cities08.sql" />
+    <EmbeddedResource Include="Scripts\MSSql\CountriesRegionsCities\Script0011 - Bulk_Insert_Cities09.sql" />
+    <EmbeddedResource Include="Scripts\MSSql\CountriesRegionsCities\Script0012 - Bulk_Insert_Cities10.sql" />
+    <EmbeddedResource Include="Scripts\MSSql\CountriesRegionsCities\Script0013 - Bulk_Insert_Cities11.sql" />
+    <EmbeddedResource Include="Scripts\PostgreSQL\CountriesRegionsCities\Script0001 - Bulk_Insert_Countries.sql" />
+    <EmbeddedResource Include="Scripts\PostgreSQL\CountriesRegionsCities\Script0002 - Bulk_Insert_Regions.sql" />
+    <EmbeddedResource Include="Scripts\PostgreSQL\CountriesRegionsCities\Script0003 - Bulk_Insert_Cities01.sql" />
+    <EmbeddedResource Include="Scripts\PostgreSQL\CountriesRegionsCities\Script0004 - Bulk_Insert_Cities02.sql" />
+    <EmbeddedResource Include="Scripts\PostgreSQL\CountriesRegionsCities\Script0005 - Bulk_Insert_Cities03.sql" />
+    <EmbeddedResource Include="Scripts\PostgreSQL\CountriesRegionsCities\Script0006 - Bulk_Insert_Cities04.sql" />
+    <EmbeddedResource Include="Scripts\PostgreSQL\CountriesRegionsCities\Script0007 - Bulk_Insert_Cities05.sql" />
+    <EmbeddedResource Include="Scripts\PostgreSQL\CountriesRegionsCities\Script0008 - Bulk_Insert_Cities06.sql" />
+    <EmbeddedResource Include="Scripts\PostgreSQL\CountriesRegionsCities\Script0009 - Bulk_Insert_Cities07.sql" />
+    <EmbeddedResource Include="Scripts\PostgreSQL\CountriesRegionsCities\Script0010 - Bulk_Insert_Cities08.sql" />
+    <EmbeddedResource Include="Scripts\PostgreSQL\CountriesRegionsCities\Script0011 - Bulk_Insert_Cities09.sql" />
+    <EmbeddedResource Include="Scripts\PostgreSQL\CountriesRegionsCities\Script0012 - Bulk_Insert_Cities10.sql" />
+    <EmbeddedResource Include="Scripts\PostgreSQL\CountriesRegionsCities\Script0013 - Bulk_Insert_Cities11.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dbup-sqlserver" Version="5.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Utils\Utils.csproj" />
+  </ItemGroup>
+
+</Project>

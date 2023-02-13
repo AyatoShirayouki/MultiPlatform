@@ -10,6 +10,7 @@ using Utils.Files;
 
 namespace FileServer_API.Controllers.Admins
 {
+    [Produces("application/json")]
     public class AdminFilesController : Controller
     {
         private readonly RefreshAdminTokenService _adminsAuthentication;
