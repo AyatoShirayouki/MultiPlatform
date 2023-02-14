@@ -11,6 +11,10 @@ using System.Threading.Tasks;
 using Freelance_ApplicationService.DTOs.Others;
 using Freelance_Repository.Implementations.EntityRepositories.Others;
 using Freelance_Data.Entities.Others;
+using Freelance_Repository.Implementations.EntityRepositories.JobRelated;
+using Freelance_Repository.Implementations.EntityRepositories.TaskRelated;
+using Freelance_Data.Entities.JobRelated;
+using Freelance_Data.Entities.TaskRelated;
 
 namespace Freelance_ApplicationService.Implementations.Others
 {
@@ -75,7 +79,7 @@ namespace Freelance_ApplicationService.Implementations.Others
             }
         }
 
-        public static async Task Save(FreelanceFileDTO FreelanceFileDTO)
+        public static async System.Threading.Tasks.Task Save(FreelanceFileDTO FreelanceFileDTO)
         {
             using (FreelanceUnitOfWork unitOfWork = new FreelanceUnitOfWork())
             {
@@ -114,17 +118,33 @@ namespace Freelance_ApplicationService.Implementations.Others
             }
         }
 
-        public static async Task Delete(int id)
+        public static async System.Threading.Tasks.Task Delete(int id)
         {
             using (FreelanceUnitOfWork unitOfWork = new FreelanceUnitOfWork())
             {
                 unitOfWork.BeginTransaction();
 
+                FilesToJobsRepository filesToJobsRepo = new FilesToJobsRepository(unitOfWork);
+                FilesToTasksRepository filesToTasksRepo = new FilesToTasksRepository(unitOfWork);
                 FreelanceFilesRepository FreelanceFilesRepo = new FreelanceFilesRepository(unitOfWork);
+
                 FreelanceFile FreelanceFile = await FreelanceFilesRepo.GetById(id);
 
                 if (FreelanceFile != null)
                 {
+                    List<FileToJob> filesToJobs = await filesToJobsRepo.GetAll(c => c.FileId == FreelanceFile.Id);
+                    List<FileToTask> filesToTasks = await filesToTasksRepo.GetAll(c => c.FileId == FreelanceFile.Id);
+
+                    foreach (FileToJob fileToJob in filesToJobs)
+                    {
+                        await filesToJobsRepo.Delete(fileToJob);
+                    }
+
+                    foreach (var fileToTask in filesToTasks)
+                    {
+                        await filesToTasksRepo.Delete(fileToTask);  
+                    }
+
                     await FreelanceFilesRepo.Delete(FreelanceFile);
                     unitOfWork.Commit();
                 }

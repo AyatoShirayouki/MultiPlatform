@@ -37,7 +37,7 @@ namespace FileServer_API.Controllers.Freelance
             tokenRequest = new TokenRequestDTO();
         }
 
-        /*
+        
         [HttpGet]
         [Route("FreelanceFiles/GetAll")]
         public async Task<IActionResult> GetAll([FromHeader] string token, [FromHeader] string refreshToken)
@@ -111,7 +111,7 @@ namespace FileServer_API.Controllers.Freelance
 
             return new JsonResult(response);
         }
-
+        /*
         [HttpGet]
         [Route("FreelanceFiles/GetFilesByParentId")]
         public async Task<IActionResult> GetFilesByParentId([FromQuery] int id, [FromHeader] string token, [FromHeader] string refreshToken)
@@ -185,12 +185,13 @@ namespace FileServer_API.Controllers.Freelance
 
             return new JsonResult(response);
         }
+        */
 
         [HttpPost("upload-file")]
         [Route("FreelanceFiles/Save")]
-        public async Task<IActionResult> Save([FromBody] List<FreelanceFileDTO> userFileDTOs, [FromHeader] string token, [FromHeader] string refreshToken)
+        public async Task<IActionResult> Save([FromBody] List<FreelanceFileDTO> userFileDTOs, [FromBody] int userId, [FromBody] string fromType, [FromBody] int typeId, [FromHeader] string token, [FromHeader] string refreshToken)
         {
-            if (userFileDTOs == null || token == null || refreshToken == null)
+            if (userFileDTOs == null || userId == 0 || string.IsNullOrEmpty(fromType) || typeId == 0 || token == null || refreshToken == null)
             {
                 response.Code = 400;
                 response.Error = " Missing data - File and/or token and/or refresh token is null or invalid!";
@@ -209,7 +210,7 @@ namespace FileServer_API.Controllers.Freelance
                 {
                     response.Code = 201;
 
-                    await SaveFile(userFileDTOs);
+                    await SaveFile(userFileDTOs, userId, fromType, typeId);
                     response.Body = "File has been saved!";
 
                     HttpContext.Response.Headers.Add("token", jwtUserToken.Token);
@@ -222,7 +223,7 @@ namespace FileServer_API.Controllers.Freelance
                 {
                     response.Code = 201;
 
-                    await SaveFile(userFileDTOs);
+                    await SaveFile(userFileDTOs, userId, fromType, typeId);
                     response.Body = "File has been saved!";
 
                     HttpContext.Response.Headers.Add("token", jwtAdminToken.Token);
@@ -250,17 +251,17 @@ namespace FileServer_API.Controllers.Freelance
             return new JsonResult(response);
         }
 
-        private async Task SaveFile(List<FreelanceFileDTO> freelanceFileDTOs)
+        private async Task SaveFile(List<FreelanceFileDTO> freelanceFileDTOs, int userId, string fromType, int typeId)
         {
             for (int i = 0; i < freelanceFileDTOs.Count; i++)
             {
                 if (freelanceFileDTOs[i].FileName != null && freelanceFileDTOs[i].FileType != null && freelanceFileDTOs[i].File != null)
                 {
 
-                    UserDTO Freelance = await UsersManagementService.GetById(freelanceFileDTOs[i].);
+                    UserDTO Freelance = await UsersManagementService.GetById(userId);
 
-                    string uploadDir = Path.Combine(webHostEnvironment.WebRootPath, "MultiPlatform", "Users",
-                        Freelance.Id + "-" + Freelance.Email, freelanceFileDTOs[i].FileType);
+                    string uploadDir = Path.Combine(webHostEnvironment.WebRootPath, "MultiPlatform", "Users", fromType,
+                        userId + "-" + typeId + "-" + Freelance.Id + "-" + Freelance.Email, freelanceFileDTOs[i].FileType);
 
                     bool exists = Directory.Exists(uploadDir);
 
@@ -272,8 +273,8 @@ namespace FileServer_API.Controllers.Freelance
 
                     FileSaveService.SaveByteArrayToFileWithFileStream(freelanceFileDTOs[i].File, filePath);
 
-                    freelanceFileDTOs[i].FileName = Path.Combine("MultiPlatform", "Users",
-                        Freelance.Id + "-" + Freelance.Email, freelanceFileDTOs[i].FileType, freelanceFileDTOs[i].FileName);
+                    freelanceFileDTOs[i].FileName = Path.Combine("MultiPlatform", "Users", fromType,
+                        userId + "-" + typeId + "-" + Freelance.Id + "-" + Freelance.Email, freelanceFileDTOs[i].FileType);
 
                     await FreelanceFilesManagementService.Save(freelanceFileDTOs[i]);
                 }
@@ -350,9 +351,9 @@ namespace FileServer_API.Controllers.Freelance
 
         [HttpDelete]
         [Route("freelanceFiles/Delete")]
-        public async Task<IActionResult> Delete([FromQuery] int id, [FromHeader] string token, [FromHeader] string refreshToken)
+        public async Task<IActionResult> Delete([FromQuery] int fileId, [FromQuery] int userId, [FromQuery] string fromType, [FromQuery] int typeId, [FromHeader] string token, [FromHeader] string refreshToken)
         {
-            if (id == 0 || token == null || refreshToken == null)
+            if (fileId == 0 || userId == 0 || string.IsNullOrEmpty(fromType) || typeId == 0 || token == null || refreshToken == null)
             {
                 response.Code = 400;
                 response.Error = "Missing data - Id and/or token data is incorrect or null";
@@ -371,7 +372,7 @@ namespace FileServer_API.Controllers.Freelance
                 {
                     response.Code = 201;
 
-                    await DeleteFile(id);
+                    await DeleteFile(fileId, userId, fromType, typeId);
                     response.Body = "File has been deleted!";
 
                     HttpContext.Response.Headers.Add("token", jwtUserToken.Token);
@@ -384,7 +385,7 @@ namespace FileServer_API.Controllers.Freelance
                 {
                     response.Code = 201;
 
-                    await DeleteFile(id);
+                    await DeleteFile(fileId, userId, fromType, typeId);
                     response.Body = "File has been deleted!";
 
                     HttpContext.Response.Headers.Add("token", jwtAdminToken.Token);
@@ -412,21 +413,21 @@ namespace FileServer_API.Controllers.Freelance
             return new JsonResult(response);
         }
 
-        private async Task DeleteFile(int id)
+        private async Task DeleteFile(int fileId, int userId, string fromType,  int typeId)
         {
-            if (id != 0)
+            if (fileId != 0 || userId == 0 || string.IsNullOrEmpty(fromType) || typeId == 0)
             {
-                FreelanceFileDTO file = await FreelanceFilesManagementService.GetById(id);
-                UserDTO Freelance = await UsersManagementService.GetById(file.UserId);
+                FreelanceFileDTO file = await FreelanceFilesManagementService.GetById(fileId);
+               UserDTO user = await UsersManagementService.GetById(userId);
 
-                var path = Path.Combine(webHostEnvironment.WebRootPath, "MultiPlatform", "Users",
-                        Freelance.Id + "-" + Freelance.Email, file.FileType, file.FileName);
+                var path = Path.Combine(webHostEnvironment.WebRootPath, "MultiPlatform", "Users", fromType,
+                        userId + "-" + typeId + "-" + file.Id + "-" + user.Email, file.FileType);
 
                 FileDeleteService.DeleteFileIfExists(path);
 
-                await FreelanceFilesManagementService.Delete(id);
+                await FreelanceFilesManagementService.Delete(fileId);
             }
         }
-        */
+        
     }
 }
