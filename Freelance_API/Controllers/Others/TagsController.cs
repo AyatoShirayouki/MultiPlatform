@@ -97,7 +97,7 @@ namespace Freelance_API.Controllers.Others
 
         [HttpPost]
         [Route("Save")]
-        public async Task<IActionResult> Save(TagDTO tagDTO, [FromHeader] string token, [FromHeader] string refreshToken)
+        public async Task<IActionResult> Save(FileTotaskDTO tagDTO, [FromHeader] string token, [FromHeader] string refreshToken)
         {
             if (tagDTO == null || token == null || refreshToken == null)
             {

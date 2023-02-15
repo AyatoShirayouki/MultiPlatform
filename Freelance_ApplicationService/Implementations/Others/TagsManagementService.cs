@@ -15,7 +15,7 @@ namespace Freelance_ApplicationService.Implementations.Others
 {
     public class TagsManagementService : IBaseManagementService
     {
-        public static async Task<List<TagDTO>> GetAll()
+        public static async Task<List<FileTotaskDTO>> GetAll()
         {
             using (FreelanceUnitOfWork unitOfWork = new FreelanceUnitOfWork())
             {
@@ -24,13 +24,13 @@ namespace Freelance_ApplicationService.Implementations.Others
                 TagsRepository TagsRepo = new TagsRepository(unitOfWork);
                 List<Tag> Tags = await TagsRepo.GetAll();
 
-                List<TagDTO> TagsDTO = new List<TagDTO>();
+                List<FileTotaskDTO> TagsDTO = new List<FileTotaskDTO>();
 
                 if (Tags != null)
                 {
                     foreach (var item in Tags)
                     {
-                        TagsDTO.Add(new TagDTO
+                        TagsDTO.Add(new FileTotaskDTO
                         {
                             Id = item.Id,
                             Name = item.Name
@@ -47,14 +47,14 @@ namespace Freelance_ApplicationService.Implementations.Others
             }
         }
 
-        public static async Task<TagDTO> GetById(int id)
+        public static async Task<FileTotaskDTO> GetById(int id)
         {
             using (FreelanceUnitOfWork unitOfWork = new FreelanceUnitOfWork())
             {
                 unitOfWork.BeginTransaction();
 
                 TagsRepository TagsRepo = new TagsRepository(unitOfWork);
-                TagDTO TagDTO = new TagDTO();
+                FileTotaskDTO TagDTO = new FileTotaskDTO();
 
                 Tag Tag = await TagsRepo.GetById(id);
 
@@ -73,7 +73,7 @@ namespace Freelance_ApplicationService.Implementations.Others
             }
         }
 
-        public static async Task Save(TagDTO TagDTO)
+        public static async Task Save(FileTotaskDTO TagDTO)
         {
             using (FreelanceUnitOfWork unitOfWork = new FreelanceUnitOfWork())
             {

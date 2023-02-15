@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Freelance_ApplicationService.DTOs.Others
 {
-    public class TagDTO : BaseEntity
+    public class FileTotaskDTO : BaseEntity
     {
         public string? Name { get; set; }
     }
