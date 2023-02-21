@@ -25,23 +25,6 @@
 
   <ItemGroup>
     <Folder Include="RestComunication\Freelance\Requests\" />
-    <Folder Include="RestComunication\Freelance\Responses\JobRelated\FilesToJobs\" />
-    <Folder Include="RestComunication\Freelance\Responses\JobRelated\JobApplications\" />
-    <Folder Include="RestComunication\Freelance\Responses\JobRelated\Jobs\" />
-    <Folder Include="RestComunication\Freelance\Responses\JobRelated\JobTypes\" />
-    <Folder Include="RestComunication\Freelance\Responses\JobRelated\TagsToJobs\" />
-    <Folder Include="RestComunication\Freelance\Responses\JobRelated\SkillsToJobs\" />
-    <Folder Include="RestComunication\Freelance\Responses\Others\Categories\" />
-    <Folder Include="RestComunication\Freelance\Responses\Others\FreelanceFiles\" />
-    <Folder Include="RestComunication\Freelance\Responses\Others\Tags\" />
-    <Folder Include="RestComunication\Freelance\Responses\Others\SkillsToCategories\" />
-    <Folder Include="RestComunication\Freelance\Responses\Others\Skills\" />
-    <Folder Include="RestComunication\Freelance\Responses\Others\Reviews\" />
-    <Folder Include="RestComunication\Freelance\Responses\Others\Notes\" />
-    <Folder Include="RestComunication\Freelance\Responses\TaskRelated\FilesToTasks\" />
-    <Folder Include="RestComunication\Freelance\Responses\TaskRelated\Tasks\" />
-    <Folder Include="RestComunication\Freelance\Responses\TaskRelated\TaskBids\" />
-    <Folder Include="RestComunication\Freelance\Responses\TaskRelated\SkillsToTasks\" />
     <Folder Include="RestComunication\Users\Responses\" />
     <Folder Include="RestComunication\Users\Requests\" />
   </ItemGroup>
