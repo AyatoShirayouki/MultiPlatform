@@ -10,12 +10,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Freelance_Repository.Implementations.EntityRepositories.JobRelated;
 using Freelance_Data.Entities.JobRelated;
+using Freelance_ApplicationService.DTOs.TaskRelated;
 
 namespace Freelance_ApplicationService.Implementations.Others
 {
     public class TagsManagementService : IBaseManagementService
     {
-        public static async Task<List<FileTotaskDTO>> GetAll()
+        public static async Task<List<TagDTO>> GetAll()
         {
             using (FreelanceUnitOfWork unitOfWork = new FreelanceUnitOfWork())
             {
@@ -24,13 +25,13 @@ namespace Freelance_ApplicationService.Implementations.Others
                 TagsRepository TagsRepo = new TagsRepository(unitOfWork);
                 List<Tag> Tags = await TagsRepo.GetAll();
 
-                List<FileTotaskDTO> TagsDTO = new List<FileTotaskDTO>();
+                List<TagDTO> TagsDTO = new List<TagDTO>();
 
                 if (Tags != null)
                 {
                     foreach (var item in Tags)
                     {
-                        TagsDTO.Add(new FileTotaskDTO
+                        TagsDTO.Add(new TagDTO
                         {
                             Id = item.Id,
                             Name = item.Name
@@ -47,14 +48,14 @@ namespace Freelance_ApplicationService.Implementations.Others
             }
         }
 
-        public static async Task<FileTotaskDTO> GetById(int id)
+        public static async Task<TagDTO> GetById(int id)
         {
             using (FreelanceUnitOfWork unitOfWork = new FreelanceUnitOfWork())
             {
                 unitOfWork.BeginTransaction();
 
                 TagsRepository TagsRepo = new TagsRepository(unitOfWork);
-                FileTotaskDTO TagDTO = new FileTotaskDTO();
+                TagDTO TagDTO = new TagDTO();
 
                 Tag Tag = await TagsRepo.GetById(id);
 
@@ -73,7 +74,7 @@ namespace Freelance_ApplicationService.Implementations.Others
             }
         }
 
-        public static async Task Save(FileTotaskDTO TagDTO)
+        public static async Task Save(TagDTO TagDTO)
         {
             using (FreelanceUnitOfWork unitOfWork = new FreelanceUnitOfWork())
             {

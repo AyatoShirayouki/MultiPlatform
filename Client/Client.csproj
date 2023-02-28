@@ -24,14 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="RestComunication\Freelance\Requests\" />
-    <Folder Include="RestComunication\Users\Responses\" />
-    <Folder Include="RestComunication\Users\Requests\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Base\Base.csproj" />
     <ProjectReference Include="..\Freelance_ApplicationService\Freelance_ApplicationService.csproj" />
+    <ProjectReference Include="..\Users_ApplicationService\Users_ApplicationService.csproj" />
   </ItemGroup>
 
 </Project>

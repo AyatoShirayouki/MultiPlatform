@@ -31,7 +31,7 @@ namespace Client.RestComunication.Freelance
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private ISession _session => _httpContextAccessor.HttpContext.Session;
-        public FreelanceRequestExecutor(IHttpContextAccessor httpContextAccessor)
+        public FreelanceRequestExecutor (IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
         }

@@ -8,6 +8,6 @@ namespace Client.RestComunication.Freelance.Responses.Others.Tags
     public class GetAllTagsResponse : BaseResponseMessage
     {
         [JsonProperty(PropertyName = "body", NullValueHandling = NullValueHandling.Ignore)]
-        public List<FileTotaskDTO> Body { get; set; }
+        public List<TagDTO> Body { get; set; }
     }
 }
