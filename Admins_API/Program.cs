@@ -82,7 +82,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped(typeof(IBaseManagementService), typeof(AdminsManagementService));
 builder.Services.AddScoped(typeof(IBaseManagementService), typeof(AdminFilesManagementService));
-builder.Services.AddScoped(typeof(IBaseManagementService), typeof(RefreshAdminTokenService));
+builder.Services.AddScoped(typeof(RefreshAdminTokenService));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

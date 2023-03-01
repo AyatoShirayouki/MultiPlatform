@@ -62,7 +62,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Admins_API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Users_API", Version = "v1" });
     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 
     c.AddSecurityDefinition("BearerAuth", new OpenApiSecurityScheme
@@ -94,7 +94,7 @@ builder.Services.AddScoped(typeof(IBaseManagementService), typeof(UserEducations
 builder.Services.AddScoped(typeof(IBaseManagementService), typeof(AcademicFieldsManagementService));
 builder.Services.AddScoped(typeof(IBaseManagementService), typeof(EducationalFacilityTypesManagementService));
 builder.Services.AddScoped(typeof(IBaseManagementService), typeof(EducationalFacilityTypesManagementService));
-builder.Services.AddScoped(typeof(IBaseManagementService), typeof(RefreshUserTokenService));
+builder.Services.AddScoped(typeof(RefreshUserTokenService));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

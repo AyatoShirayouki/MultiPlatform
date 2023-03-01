@@ -60,7 +60,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Admins_API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Freelance_API", Version = "v1" });
     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 
     c.AddSecurityDefinition("BearerAuth", new OpenApiSecurityScheme

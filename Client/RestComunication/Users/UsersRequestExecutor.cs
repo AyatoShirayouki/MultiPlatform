@@ -8,6 +8,9 @@ using Client.RestComunication.Users.Responses.Education.EducationDetails.Academi
 using Client.RestComunication.Users.Responses.Education.EducationDetails.EducationalFacilities;
 using Client.RestComunication.Users.Responses.Education.EducationDetails.EducationalFacilityTypes;
 using Client.RestComunication.Users.Responses.Education.UserEducations;
+using Client.RestComunication.Users.Responses.Others.PricingPlanFeatures;
+using Client.RestComunication.Users.Responses.Others.PricingPlans;
+using Client.RestComunication.Users.Responses.Others.UserFiles;
 using Client.RestComunication.Users.Responses.Others.Users;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -1276,6 +1279,354 @@ namespace Client.RestComunication.Users
             }
 
             return _getEducationalFacilityTypesByIdResponse;
+        }
+
+        // PricingPlanFeatures
+        public async Task<GetAllPricingPlanFeaturesResponse> GetAllPricingPlanFeaturesAction(HttpClient httpClient, string requestQuery)
+        {
+            GetAllPricingPlanFeaturesResponse _getAllPricingPlanFeaturesRespponse = new GetAllPricingPlanFeaturesResponse();
+
+            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+            using (var response = await httpClient.GetAsync(requestQuery))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+                    var convert = JsonConvert.DeserializeObject<GetAllPricingPlanFeaturesResponse>(apiResponse);
+
+                    if (convert != null)
+                    {
+                        _getAllPricingPlanFeaturesRespponse = convert;
+
+                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                    }
+                }
+            }
+            return _getAllPricingPlanFeaturesRespponse;
+        }
+        public async Task<DeletePricingPlanFeaturesResponse> DeletePricingPlanFeaturesAction(HttpClient httpClient, string requestQuery)
+        {
+            DeletePricingPlanFeaturesResponse _deletePricingPlanFeaturesResponse = new DeletePricingPlanFeaturesResponse();
+
+            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+            using (var response = await httpClient.DeleteAsync(requestQuery))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+                    var convert = JsonConvert.DeserializeObject<DeletePricingPlanFeaturesResponse>(apiResponse);
+
+                    if (convert != null)
+                    {
+                        _deletePricingPlanFeaturesResponse = convert;
+
+                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                    }
+                }
+            }
+            return _deletePricingPlanFeaturesResponse;
+        }
+        public async Task<SavePricingPlanFeaturesResponse> SavePricingPlanFeaturesAction(HttpClient httpClient, UserEducationDTO request, string requestQuery)
+        {
+            SavePricingPlanFeaturesResponse _savePricingPlanFeaturesResponse = new SavePricingPlanFeaturesResponse();
+
+            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+            httpClient.BaseAddress = new Uri(requestQuery);
+            httpClient.DefaultRequestHeaders.Accept.Clear();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var content = JsonConvert.SerializeObject(request);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            using (var response = await httpClient.PostAsync("", byteContent))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+                    var convert = JsonConvert.DeserializeObject<SavePricingPlanFeaturesResponse>(apiResponse);
+
+                    if (convert != null)
+                    {
+                        _savePricingPlanFeaturesResponse = convert;
+
+                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                    }
+                }
+            }
+            return _savePricingPlanFeaturesResponse;
+        }
+        public async Task<GetPricingPlanFeaturesByIdResponse> GetPricingPlanFeaturesByIdAction(HttpClient httpClient, string requestQuery)
+        {
+            GetPricingPlanFeaturesByIdResponse _getPricingPlanFeaturesByIdResponse = new GetPricingPlanFeaturesByIdResponse();
+
+            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+            using (var response = await httpClient.GetAsync(requestQuery))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+                    var convert = JsonConvert.DeserializeObject<GetPricingPlanFeaturesByIdResponse>(apiResponse);
+
+                    if (convert != null)
+                    {
+                        _getPricingPlanFeaturesByIdResponse = convert;
+
+                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                    }
+                }
+            }
+
+            return _getPricingPlanFeaturesByIdResponse;
+        }
+
+        // PricingPlans
+        public async Task<GetAllPricingPlansResponse> GetAllPricingPlansAction(HttpClient httpClient, string requestQuery)
+        {
+            GetAllPricingPlansResponse _getAllPricingPlansRespponse = new GetAllPricingPlansResponse();
+
+            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+            using (var response = await httpClient.GetAsync(requestQuery))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+                    var convert = JsonConvert.DeserializeObject<GetAllPricingPlansResponse>(apiResponse);
+
+                    if (convert != null)
+                    {
+                        _getAllPricingPlansRespponse = convert;
+
+                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                    }
+                }
+            }
+            return _getAllPricingPlansRespponse;
+        }
+        public async Task<DeletePricingPlansResponse> DeletePricingPlansAction(HttpClient httpClient, string requestQuery)
+        {
+            DeletePricingPlansResponse _deletePricingPlansResponse = new DeletePricingPlansResponse();
+
+            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+            using (var response = await httpClient.DeleteAsync(requestQuery))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+                    var convert = JsonConvert.DeserializeObject<DeletePricingPlansResponse>(apiResponse);
+
+                    if (convert != null)
+                    {
+                        _deletePricingPlansResponse = convert;
+
+                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                    }
+                }
+            }
+            return _deletePricingPlansResponse;
+        }
+        public async Task<SavePricingPlansResponse> SavePricingPlansAction(HttpClient httpClient, UserEducationDTO request, string requestQuery)
+        {
+            SavePricingPlansResponse _savePricingPlansResponse = new SavePricingPlansResponse();
+
+            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+            httpClient.BaseAddress = new Uri(requestQuery);
+            httpClient.DefaultRequestHeaders.Accept.Clear();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var content = JsonConvert.SerializeObject(request);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            using (var response = await httpClient.PostAsync("", byteContent))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+                    var convert = JsonConvert.DeserializeObject<SavePricingPlansResponse>(apiResponse);
+
+                    if (convert != null)
+                    {
+                        _savePricingPlansResponse = convert;
+
+                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                    }
+                }
+            }
+            return _savePricingPlansResponse;
+        }
+        public async Task<GetPricingPlansByIdResponse> GetPricingPlansByIdAction(HttpClient httpClient, string requestQuery)
+        {
+            GetPricingPlansByIdResponse _getPricingPlansByIdResponse = new GetPricingPlansByIdResponse();
+
+            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+            using (var response = await httpClient.GetAsync(requestQuery))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+                    var convert = JsonConvert.DeserializeObject<GetPricingPlansByIdResponse>(apiResponse);
+
+                    if (convert != null)
+                    {
+                        _getPricingPlansByIdResponse = convert;
+
+                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                    }
+                }
+            }
+
+            return _getPricingPlansByIdResponse;
+        }
+
+        // UserFiles
+        public async Task<GetAllUserFilesResponse> GetAllUserFilesAction(HttpClient httpClient, string requestQuery)
+        {
+            GetAllUserFilesResponse _getAllUserFilesRespponse = new GetAllUserFilesResponse();
+
+            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+            using (var response = await httpClient.GetAsync(requestQuery))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+                    var convert = JsonConvert.DeserializeObject<GetAllUserFilesResponse>(apiResponse);
+
+                    if (convert != null)
+                    {
+                        _getAllUserFilesRespponse = convert;
+
+                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                    }
+                }
+            }
+            return _getAllUserFilesRespponse;
+        }
+        public async Task<DeleteUserFilesResponse> DeleteUserFilesAction(HttpClient httpClient, string requestQuery)
+        {
+            DeleteUserFilesResponse _deleteUserFilesResponse = new DeleteUserFilesResponse();
+
+            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+            using (var response = await httpClient.DeleteAsync(requestQuery))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+                    var convert = JsonConvert.DeserializeObject<DeleteUserFilesResponse>(apiResponse);
+
+                    if (convert != null)
+                    {
+                        _deleteUserFilesResponse = convert;
+
+                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                    }
+                }
+            }
+            return _deleteUserFilesResponse;
+        }
+        public async Task<SaveUserFilesResponse> SaveUserFilesAction(HttpClient httpClient, UserEducationDTO request, string requestQuery)
+        {
+            SaveUserFilesResponse _saveUserFilesResponse = new SaveUserFilesResponse();
+
+            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+            httpClient.BaseAddress = new Uri(requestQuery);
+            httpClient.DefaultRequestHeaders.Accept.Clear();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var content = JsonConvert.SerializeObject(request);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            using (var response = await httpClient.PostAsync("", byteContent))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+                    var convert = JsonConvert.DeserializeObject<SaveUserFilesResponse>(apiResponse);
+
+                    if (convert != null)
+                    {
+                        _saveUserFilesResponse = convert;
+
+                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                    }
+                }
+            }
+            return _saveUserFilesResponse;
+        }
+        public async Task<GetUserFilesByIdResponse> GetUserFilesByIdAction(HttpClient httpClient, string requestQuery)
+        {
+            GetUserFilesByIdResponse _getUserFilesByIdResponse = new GetUserFilesByIdResponse();
+
+            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+            using (var response = await httpClient.GetAsync(requestQuery))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+                    var convert = JsonConvert.DeserializeObject<GetUserFilesByIdResponse>(apiResponse);
+
+                    if (convert != null)
+                    {
+                        _getUserFilesByIdResponse = convert;
+
+                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                    }
+                }
+            }
+
+            return _getUserFilesByIdResponse;
         }
     }
 }

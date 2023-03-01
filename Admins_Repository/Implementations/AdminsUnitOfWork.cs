@@ -16,7 +16,7 @@ namespace Admins_Repository.Implementations
 
         public AdminsUnitOfWork()
         {
-            Context = new AdminDbContext();
+            Context = new AdminsDbContext();
         }
 
         public void BeginTransaction()

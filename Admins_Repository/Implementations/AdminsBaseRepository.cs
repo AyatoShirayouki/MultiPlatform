@@ -22,13 +22,13 @@ namespace Admins_Repository.Implementations
 
         public AdminsBaseRepository()
         {
-            Context = new AdminDbContext();
+            Context = new AdminsDbContext();
             Items = Context.Set<T>();
         }
 
         public AdminsBaseRepository(AdminsUnitOfWork uow)
         {
-            Context = new AdminDbContext();
+            Context = new AdminsDbContext();
             Items = Context.Set<T>();
         }
 
