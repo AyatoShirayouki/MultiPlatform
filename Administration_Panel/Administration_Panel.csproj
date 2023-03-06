@@ -21,12 +21,33 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.12" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="RestComunication\" />
+    <Folder Include="Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="RestComunication\Admins\Responses\AdminFiles\" />
+    <Folder Include="RestComunication\Admins\Responses\Admins\" />
+    <Folder Include="RestComunication\Admins\Responses\" />
+    <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\fonts\" />
+    <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\img\" />
+    <Folder Include="wwwroot\js\" />
+    <Folder Include="wwwroot\lib\bootstrap\" />
+    <Folder Include="wwwroot\lib\bootstrap\dist\js\" />
+    <Folder Include="wwwroot\lib\jquery-validation-unobtrusive\" />
+    <Folder Include="wwwroot\lib\jquery-validation\" />
+    <Folder Include="wwwroot\lib\jquery-validation\dist\" />
+    <Folder Include="wwwroot\lib\jquery\" />
+    <Folder Include="wwwroot\lib\jquery\dist\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Freelance_ApplicationService\Freelance_ApplicationService.csproj" />
+    <ProjectReference Include="..\Users_ApplicationService\Users_ApplicationService.csproj" />
   </ItemGroup>
 
 </Project>

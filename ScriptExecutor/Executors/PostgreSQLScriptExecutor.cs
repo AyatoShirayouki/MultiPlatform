@@ -13,13 +13,13 @@ namespace ScriptExecutor.Executors
 {
     public class PostgreSQLScriptExecutor
     {
-        public static async Task<int> RunCountriesRegionsCitiesScripts()
+        public async Task<int> RunCountriesRegionsCitiesScripts()
         {
             string CS = GlobalVariables.Users_DB_CN;
             string FP = @"Scripts\MSSql\CountriesRegionsCities";
             return await ExecuteScripts(CS, FP);
         }
-        private static async Task<int> ExecuteScripts(string ConnectionString, string FilePath)
+        private async Task<int> ExecuteScripts(string ConnectionString, string FilePath)
         {
             bool dropDatabase = false;
 
@@ -28,7 +28,7 @@ namespace ScriptExecutor.Executors
             return !result.Successful ? ShowError(result.Error) : ShowSuccess();
         }
 
-        private static DatabaseUpgradeResult RunDatabaseUpdate(string connectionString, bool dropDatabase, string SRC_PATH)
+        private DatabaseUpgradeResult RunDatabaseUpdate(string connectionString, bool dropDatabase, string SRC_PATH)
         {
             if (dropDatabase)
             {

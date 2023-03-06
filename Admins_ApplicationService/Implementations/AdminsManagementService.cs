@@ -3,9 +3,11 @@ using Admins_Data.Entities;
 using Admins_Repository.Implementations;
 using Admins_Repository.Implementations.EntityRepositories;
 using Base.ManagementService;
+using ScriptExecutor.Executors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -175,5 +177,21 @@ namespace Admins_ApplicationService.Implementations
                 }
             }
         }
-    }
+
+        public static async Task<int> FillCountriesRegionsAndCitiesActionMSSQL()
+        {
+            MSSqlScriptExecutor executor= new MSSqlScriptExecutor();
+            int result = await executor.RunCountriesRegionsCitiesScripts();
+
+            return result;
+        }
+
+		public static async Task<int> FillCountriesRegionsAndCitiesActionPostgreSQL()
+		{
+			PostgreSQLScriptExecutor executor = new PostgreSQLScriptExecutor();
+			int result = await executor.RunCountriesRegionsCitiesScripts();
+
+			return result;
+		}
+	}
 }

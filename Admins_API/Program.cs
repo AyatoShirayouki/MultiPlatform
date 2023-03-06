@@ -11,6 +11,7 @@ using System.Text;
 using Utils.Global;
 
 var builder = WebApplication.CreateBuilder(args);
+
 var configuration = builder.Services.BuildServiceProvider().GetRequiredService<IConfiguration>();
 
 builder.Services.AddHttpContextAccessor();
@@ -22,6 +23,8 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 });
 
 builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddOptions();
 
 builder.Services.Configure<JwtConfig>(configuration.GetSection("JwtConfig"));
 
@@ -82,7 +85,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped(typeof(IBaseManagementService), typeof(AdminsManagementService));
 builder.Services.AddScoped(typeof(IBaseManagementService), typeof(AdminFilesManagementService));
-builder.Services.AddScoped(typeof(RefreshAdminTokenService));
+//builder.Services.AddScoped(typeof(RefreshAdminTokenService));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

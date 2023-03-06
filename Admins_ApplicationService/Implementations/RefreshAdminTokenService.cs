@@ -14,6 +14,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Utils.Global;
 
 namespace Admins_ApplicationService.Implementations
 {
@@ -88,7 +89,7 @@ namespace Admins_ApplicationService.Implementations
                     await refreshTokensRepo.Save(t);
                 }
 
-                var key = Encoding.ASCII.GetBytes(_jwtConfig.Secret);
+                var key = Encoding.ASCII.GetBytes(GlobalVariables.JWT_Encription_Key); //_jwtConfig.Secret
 
                 SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
                 {

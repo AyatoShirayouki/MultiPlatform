@@ -25,8 +25,15 @@ namespace Client.Controllers
 
         public IActionResult Index()
         {
-            ViewData["BaseImagesPath"] = _FileServerURI + "/Freelance/BaseImages/";
+            //ViewData["BaseImagesPath"] = _FileServerURI + "/Freelance/BaseImages/";
+			this.HttpContext.Session.SetString("BaseImagesPath", _FileServerURI + "/Freelance/BaseImages/");
+            //this.HttpContext.Session.GetString("BaseImagesPath");
 
+			return View();
+        }
+
+        public IActionResult Contact()
+        {
             return View();
         }
 

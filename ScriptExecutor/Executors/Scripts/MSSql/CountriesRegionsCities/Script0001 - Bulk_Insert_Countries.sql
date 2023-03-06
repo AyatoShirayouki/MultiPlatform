@@ -1,3 +1,5 @@
+SET IDENTITY_INSERT [dbo].[Countries] ON
+
 INSERT [dbo].[Countries] ([Id], [Name], [Code], [Language]) VALUES (1, N'Andorra', N'AD', N'ca')
 INSERT [dbo].[Countries] ([Id], [Name], [Code], [Language]) VALUES (2, N'United Arab Emirates', N'AE', N'ar')
 INSERT [dbo].[Countries] ([Id], [Name], [Code], [Language]) VALUES (3, N'Afghanistan', N'AF', N'fa')
@@ -230,3 +232,5 @@ INSERT [dbo].[Countries] ([Id], [Name], [Code], [Language]) VALUES (227, N'Zambi
 INSERT [dbo].[Countries] ([Id], [Name], [Code], [Language]) VALUES (228, N'Zaire (former)', N'ZR', N'fr')
 INSERT [dbo].[Countries] ([Id], [Name], [Code], [Language]) VALUES (229, N'Zimbabwe', N'ZW', N'en')
 INSERT [dbo].[Countries] ([Id], [Name], [Code], [Language]) VALUES (230, N'United States of America', N'US', N'en')
+
+SET IDENTITY_INSERT [dbo].[Countries] OFF

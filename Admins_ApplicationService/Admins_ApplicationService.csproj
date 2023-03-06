@@ -27,6 +27,7 @@
     <ProjectReference Include="..\Admins_Data\Admins_Data.csproj" />
     <ProjectReference Include="..\Admins_Repository\Admins_Repository.csproj" />
     <ProjectReference Include="..\Authorisation\Authorisation.csproj" />
+    <ProjectReference Include="..\ScriptExecutor\ScriptExecutor.csproj" />
   </ItemGroup>
 
 </Project>
