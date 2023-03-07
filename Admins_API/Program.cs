@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Microsoft.VisualBasic.FileIO;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Text;
 using Utils.Global;
 
 var builder = WebApplication.CreateBuilder(args);
-
 var configuration = builder.Services.BuildServiceProvider().GetRequiredService<IConfiguration>();
 
 builder.Services.AddHttpContextAccessor();
@@ -24,9 +24,7 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 
 builder.Services.AddDistributedMemoryCache();
 
-builder.Services.AddOptions();
-
-builder.Services.Configure<JwtConfig>(configuration.GetSection("JwtConfig"));
+builder.Services.Configure<JwtConfig>(s => s.Secret = GlobalVariables.JWT_Encription_Key);
 
 var key = Encoding.ASCII.GetBytes(GlobalVariables.JWT_Encription_Key);
 
@@ -85,7 +83,8 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped(typeof(IBaseManagementService), typeof(AdminsManagementService));
 builder.Services.AddScoped(typeof(IBaseManagementService), typeof(AdminFilesManagementService));
-//builder.Services.AddScoped(typeof(RefreshAdminTokenService));
+
+builder.Services.AddSingleton(typeof(RefreshAdminTokenService));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

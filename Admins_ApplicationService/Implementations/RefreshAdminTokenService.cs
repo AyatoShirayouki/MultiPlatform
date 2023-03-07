@@ -89,7 +89,7 @@ namespace Admins_ApplicationService.Implementations
                     await refreshTokensRepo.Save(t);
                 }
 
-                var key = Encoding.ASCII.GetBytes(GlobalVariables.JWT_Encription_Key); //_jwtConfig.Secret
+                var key = Encoding.ASCII.GetBytes(_jwtConfig.Secret); //_jwtConfig.Secret
 
                 SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
                 {
