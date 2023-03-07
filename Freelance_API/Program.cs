@@ -25,7 +25,7 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 
 builder.Services.AddDistributedMemoryCache();
 
-builder.Services.Configure<JwtConfig>(configuration.GetSection("JwtConfig"));
+builder.Services.Configure<JwtConfig>(s => s.Secret = GlobalVariables.JWT_Encription_Key);
 
 var key = Encoding.ASCII.GetBytes(GlobalVariables.JWT_Encription_Key);
 

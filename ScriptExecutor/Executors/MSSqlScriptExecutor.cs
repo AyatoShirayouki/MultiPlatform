@@ -12,21 +12,10 @@ namespace ScriptExecutor.Executors
 {
     public class MSSqlScriptExecutor
     {
-        /*
-        private static string _connectionString; //E:\Projects\MultiPlatformProject\MultiPlatform\ScriptExecutor\Scripts\CountriesAndCities
-        private static string _filePath;// = @"Scripts\MSSql\CountriesAndCities"; //= GlobalVariables.Users_DB_CN;
-        public MSSqlScriptExecutor(string connectionString, string filePath)
-        {
-            _connectionString = connectionString;
-            _filePath = filePath;
-        }
-        */
-
         public async Task<int> RunCountriesRegionsCitiesScripts()
         {
             string CS = GlobalVariables.Users_DB_CN;
             string FP = @"E:\Projects\MultiPlatformProject\MultiPlatform\ScriptExecutor\Executors\Scripts\MSSql\CountriesRegionsCities";
-                                //E:\Projects\MultiPlatformProject\MultiPlatform\ScriptExecutor\Executors\Scripts\MSSql\CountriesRegionsCities\
             return await ExecuteScripts(CS, FP);
         }
         private async Task<int> ExecuteScripts(string ConnectionString, string FilePath)

@@ -189,8 +189,8 @@ namespace Admins_API.Controllers
         }
 
         [HttpPost]
-        [Route("Save")]
-        public async Task<IActionResult> Save(AdminDTO adminDTO, [FromHeader] string token, [FromHeader] string refreshToken)
+        [Route("Update")]
+        public async Task<IActionResult> Update(AdminDTO adminDTO, [FromHeader] string token, [FromHeader] string refreshToken)
         {
             BaseResponseMessage response = new BaseResponseMessage();
 

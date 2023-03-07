@@ -16,7 +16,7 @@ namespace ScriptExecutor.Executors
         public async Task<int> RunCountriesRegionsCitiesScripts()
         {
             string CS = GlobalVariables.Users_DB_CN;
-            string FP = @"Scripts\MSSql\CountriesRegionsCities";
+            string FP = @"E:\Projects\MultiPlatformProject\MultiPlatform\ScriptExecutor\Executors\Scripts\PostgreSQL\CountriesRegionsCities";
             return await ExecuteScripts(CS, FP);
         }
         private async Task<int> ExecuteScripts(string ConnectionString, string FilePath)

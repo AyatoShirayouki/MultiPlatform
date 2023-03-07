@@ -28,9 +28,6 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Models\" />
-    <Folder Include="RestComunication\Admins\Responses\AdminFiles\" />
-    <Folder Include="RestComunication\Admins\Responses\Admins\" />
-    <Folder Include="RestComunication\Admins\Responses\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\fonts\" />
     <Folder Include="wwwroot\images\" />
@@ -46,6 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Admins_ApplicationService\Admins_ApplicationService.csproj" />
     <ProjectReference Include="..\Freelance_ApplicationService\Freelance_ApplicationService.csproj" />
     <ProjectReference Include="..\Users_ApplicationService\Users_ApplicationService.csproj" />
   </ItemGroup>

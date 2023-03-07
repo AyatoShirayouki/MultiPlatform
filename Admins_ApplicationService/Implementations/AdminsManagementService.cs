@@ -180,18 +180,46 @@ namespace Admins_ApplicationService.Implementations
 
         public static async Task<int> FillCountriesRegionsAndCitiesActionMSSQL()
         {
-            MSSqlScriptExecutor executor= new MSSqlScriptExecutor();
-            int result = await executor.RunCountriesRegionsCitiesScripts();
+            using (AdminsUnitOfWork unitOfWork = new AdminsUnitOfWork())
+            {
+                unitOfWork.BeginTransaction();
 
-            return result;
+                MSSqlScriptExecutor executor = new MSSqlScriptExecutor();
+                int result = await executor.RunCountriesRegionsCitiesScripts();
+
+                if (result == 1)
+                {
+                    unitOfWork.Commit();
+                }
+                else
+                {
+                    unitOfWork.Rollback();
+                }
+
+                return result;
+            }
         }
 
 		public static async Task<int> FillCountriesRegionsAndCitiesActionPostgreSQL()
 		{
-			PostgreSQLScriptExecutor executor = new PostgreSQLScriptExecutor();
-			int result = await executor.RunCountriesRegionsCitiesScripts();
+            using (AdminsUnitOfWork unitOfWork = new AdminsUnitOfWork())
+            {
+                unitOfWork.BeginTransaction();
 
-			return result;
+                PostgreSQLScriptExecutor executor = new PostgreSQLScriptExecutor();
+                int result = await executor.RunCountriesRegionsCitiesScripts();
+
+                if (result == 1)
+                {
+                    unitOfWork.Commit();
+                }
+                else
+                {
+                    unitOfWork.Rollback();
+                }
+
+                return result;
+            }
 		}
 	}
 }
