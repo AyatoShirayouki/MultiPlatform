@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Executors\Scripts\MSSql\Categories\Script0001 - Bulk_Insert_Categories.sql" />
     <None Remove="Executors\Scripts\MSSql\CountriesRegionsCities\Script0001 - Bulk_Insert_Countries.sql" />
     <None Remove="Executors\Scripts\MSSql\CountriesRegionsCities\Script0002 - Bulk_Insert_Regions.sql" />
     <None Remove="Executors\Scripts\MSSql\CountriesRegionsCities\Script0003 - Bulk_Insert_Cities01.sql" />
@@ -20,6 +21,7 @@
     <None Remove="Executors\Scripts\MSSql\CountriesRegionsCities\Script0011 - Bulk_Insert_Cities09.sql" />
     <None Remove="Executors\Scripts\MSSql\CountriesRegionsCities\Script0012 - Bulk_Insert_Cities10.sql" />
     <None Remove="Executors\Scripts\MSSql\CountriesRegionsCities\Script0013 - Bulk_Insert_Cities11.sql" />
+    <None Remove="Executors\Scripts\PostgreSQL\Categories\Script0001 - Bulk_Insert_Categories.sql" />
     <None Remove="Executors\Scripts\PostgreSQL\CountriesRegionsCities\Script0002 - Bulk_Insert_Regions.sql" />
     <None Remove="Executors\Scripts\PostgreSQL\CountriesRegionsCities\Script0003 - Bulk_Insert_Cities01.sql" />
     <None Remove="Executors\Scripts\PostgreSQL\CountriesRegionsCities\Script0004 - Bulk_Insert_Cities02.sql" />
@@ -36,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Executors\Scripts\MSSql\Categories\Script0001 - Bulk_Insert_Categories.sql" />
     <EmbeddedResource Include="Executors\Scripts\MSSql\CountriesRegionsCities\Script0001 - Bulk_Insert_Countries.sql" />
     <EmbeddedResource Include="Executors\Scripts\MSSql\CountriesRegionsCities\Script0002 - Bulk_Insert_Regions.sql" />
     <EmbeddedResource Include="Executors\Scripts\MSSql\CountriesRegionsCities\Script0003 - Bulk_Insert_Cities01.sql" />
@@ -49,6 +52,7 @@
     <EmbeddedResource Include="Executors\Scripts\MSSql\CountriesRegionsCities\Script0011 - Bulk_Insert_Cities09.sql" />
     <EmbeddedResource Include="Executors\Scripts\MSSql\CountriesRegionsCities\Script0012 - Bulk_Insert_Cities10.sql" />
     <EmbeddedResource Include="Executors\Scripts\MSSql\CountriesRegionsCities\Script0013 - Bulk_Insert_Cities11.sql" />
+    <EmbeddedResource Include="Executors\Scripts\PostgreSQL\Categories\Script0001 - Bulk_Insert_Categories.sql" />
     <EmbeddedResource Include="Executors\Scripts\PostgreSQL\CountriesRegionsCities\Script0001 - Bulk_Insert_Countries.sql" />
     <EmbeddedResource Include="Executors\Scripts\PostgreSQL\CountriesRegionsCities\Script0002 - Bulk_Insert_Regions.sql" />
     <EmbeddedResource Include="Executors\Scripts\PostgreSQL\CountriesRegionsCities\Script0003 - Bulk_Insert_Cities01.sql" />

@@ -221,5 +221,49 @@ namespace Admins_ApplicationService.Implementations
                 return result;
             }
 		}
-	}
+
+        public static async Task<int> FillCategoriesActionMSSQL()
+        {
+            using (AdminsUnitOfWork unitOfWork = new AdminsUnitOfWork())
+            {
+                unitOfWork.BeginTransaction();
+
+                MSSqlScriptExecutor executor = new MSSqlScriptExecutor();
+                int result = await executor.RunCategoriesScripts();
+
+                if (result == 1)
+                {
+                    unitOfWork.Commit();
+                }
+                else
+                {
+                    unitOfWork.Rollback();
+                }
+
+                return result;
+            }
+        }
+
+        public static async Task<int> FillCategoriesActionPostgreSQL()
+        {
+            using (AdminsUnitOfWork unitOfWork = new AdminsUnitOfWork())
+            {
+                unitOfWork.BeginTransaction();
+
+                PostgreSQLScriptExecutor executor = new PostgreSQLScriptExecutor();
+                int result = await executor.RunCategoriesScripts();
+
+                if (result == 1)
+                {
+                    unitOfWork.Commit();
+                }
+                else
+                {
+                    unitOfWork.Rollback();
+                }
+
+                return result;
+            }
+        }
+    }
 }

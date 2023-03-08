@@ -13,5 +13,11 @@ namespace Freelance_Data.Entities.Others
         [Required]
         [MaxLength(100)]
         public string? Name { get; set; }
+
+        [MaxLength(100)]
+        public string? Description { get; set; }
+
+        [MaxLength(150)]
+        public string? CategoryIcon { get; set; }
     }
 }

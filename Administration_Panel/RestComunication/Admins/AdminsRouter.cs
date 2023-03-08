@@ -12,6 +12,8 @@
         public string Admins_Logout = "/api/Admins/Logout?";
         public string Admins_FillCountriesRegionsAndCitiesActionMSSQL = "/api/Admins/FillCountriesRegionsAndCitiesActionMSSQL?";
         public string Admins_FillCountriesRegionsAndCitiesActionPostgreSQL = "/api/Admins/FillCountriesRegionsAndCitiesActionPostgreSQL?";
+        public string Admins_FillCategoriesActionMSSQL = "/api/Admins/FillCategoriesActionMSSQL?";
+        public string Admins_FillCategoriesActionPostgreSQL = "/api/Admins/FillCategoriesActionPostgreSQL?";
 
         //AdminFiles
         public string AdminFiles_GetAll = "/api/AdminFiles/GetAll";

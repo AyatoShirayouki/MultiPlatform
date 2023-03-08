@@ -29,6 +29,14 @@
         {
             return uri + _router.Admins_FillCountriesRegionsAndCitiesActionPostgreSQL;
         }
+        public string FillCategoriesActionMSSQLRequestHelper(string uri)
+        {
+            return uri + _router.Admins_FillCategoriesActionMSSQL;
+        }
+        public string FillCategoriesActionPostgreSQLRequestHelper(string uri)
+        {
+            return uri + _router.Admins_FillCategoriesActionPostgreSQL;
+        }
 
         //AdminFiles
         public string DeleteAdminFilesByIdRequestHelper(string uri, int id)

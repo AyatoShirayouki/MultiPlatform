@@ -36,7 +36,9 @@ namespace Freelance_ApplicationService.Implementations.Others
                         CategoriesDTO.Add(new CategoryDTO
                         {
                             Id = item.Id,
-                            Name = item.Name
+                            Name = item.Name,
+                            Description = item.Description,
+                            CategoryIcon = item.CategoryIcon,
                         });
                     }
 
@@ -65,6 +67,8 @@ namespace Freelance_ApplicationService.Implementations.Others
                 {
                     CategoryDTO.Id = Category.Id;
                     CategoryDTO.Name = Category.Name;
+                    CategoryDTO.Description = Category.Description;
+                    CategoryDTO.CategoryIcon = Category.CategoryIcon;
 
                     unitOfWork.Commit();
                 }
@@ -91,7 +95,9 @@ namespace Freelance_ApplicationService.Implementations.Others
                     {
                         Category = new Category
                         {
-                            Name = CategoryDTO.Name
+                            Name = CategoryDTO.Name,
+                            Description = CategoryDTO.Description,
+                            CategoryIcon = CategoryDTO.CategoryIcon
                         };
                     }
                     else
@@ -99,7 +105,9 @@ namespace Freelance_ApplicationService.Implementations.Others
                         Category = new Category
                         {
                             Id = CategoryDTO.Id,
-                            Name = CategoryDTO.Name
+                            Name = CategoryDTO.Name, 
+                            Description = CategoryDTO.Description, 
+                            CategoryIcon = CategoryDTO.CategoryIcon
                         };
                     }
 

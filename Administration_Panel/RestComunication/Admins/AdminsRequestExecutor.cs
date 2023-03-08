@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using Administration_Panel.RestComunication.Admins.Responses.Authentication;
 using Freelance_ApplicationService.DTOs.Bookmarks;
 using Administration_Panel.RestComunication.Admins.Responses.AdminFiles;
+using Administration_Panel.RestComunication.Admins.Responses.ScriptExecutors;
 
 namespace Administration_Panel.RestComunication.Admins
 {
@@ -164,7 +165,7 @@ namespace Administration_Panel.RestComunication.Admins
 
                     if (convert != null)
                     {
-                        _signUpResponse.Code = convert;
+                        _signUpResponse = convert;
                     }
                 }
             }
@@ -343,6 +344,119 @@ namespace Administration_Panel.RestComunication.Admins
             }
 
             return _getAdminFilesByIdResponse;
+        }
+
+        //Database Actions
+        public async Task<FillCountriesRegionsAndCitiesMSSQLResponse> FillCountriesRegionsAndCitiesMSSQLAction(HttpClient httpClient, string requestQuery)
+        {
+            FillCountriesRegionsAndCitiesMSSQLResponse _fillCountriesRegionsAndCitiesMSSQLResponse = new FillCountriesRegionsAndCitiesMSSQLResponse();
+
+            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+            using (var response = await httpClient.GetAsync(requestQuery))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+                    var convert = JsonConvert.DeserializeObject<FillCountriesRegionsAndCitiesMSSQLResponse>(apiResponse);
+
+                    if (convert != null)
+                    {
+                        _fillCountriesRegionsAndCitiesMSSQLResponse = convert;
+
+                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                    }
+                }
+            }
+
+            return _fillCountriesRegionsAndCitiesMSSQLResponse;
+        }
+
+        public async Task<FillCountriesRegionsAndCitiesPostgreSQLResponse> FillCountriesRegionsAndCitiesPostgreSQLAction(HttpClient httpClient, string requestQuery)
+        {
+            FillCountriesRegionsAndCitiesPostgreSQLResponse _fillCountriesRegionsAndCitiesPostgreSQLResponse = new FillCountriesRegionsAndCitiesPostgreSQLResponse();
+
+            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+            using (var response = await httpClient.GetAsync(requestQuery))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+                    var convert = JsonConvert.DeserializeObject<FillCountriesRegionsAndCitiesPostgreSQLResponse>(apiResponse);
+
+                    if (convert != null)
+                    {
+                        _fillCountriesRegionsAndCitiesPostgreSQLResponse = convert;
+
+                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                    }
+                }
+            }
+
+            return _fillCountriesRegionsAndCitiesPostgreSQLResponse;
+        }
+
+        public async Task<FillCategoriesMSSQLResponse> FillCategoriesMSSQLAction(HttpClient httpClient, string requestQuery)
+        {
+            FillCategoriesMSSQLResponse _fillCategoriesMSSQLResponse = new FillCategoriesMSSQLResponse();
+
+            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+            using (var response = await httpClient.GetAsync(requestQuery))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+                    var convert = JsonConvert.DeserializeObject<FillCategoriesMSSQLResponse>(apiResponse);
+
+                    if (convert != null)
+                    {
+                        _fillCategoriesMSSQLResponse = convert;
+
+                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                    }
+                }
+            }
+
+            return _fillCategoriesMSSQLResponse;
+        }
+
+        public async Task<FillCategoriesPostgreSQLResponse> FillCategoriesPostgreSQLAction(HttpClient httpClient, string requestQuery)
+        {
+            FillCategoriesPostgreSQLResponse _fillCategoriesPostgreSQLResponse = new FillCategoriesPostgreSQLResponse();
+
+            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+            using (var response = await httpClient.GetAsync(requestQuery))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+                    var convert = JsonConvert.DeserializeObject<FillCategoriesPostgreSQLResponse>(apiResponse);
+
+                    if (convert != null)
+                    {
+                        _fillCategoriesPostgreSQLResponse = convert;
+
+                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                    }
+                }
+            }
+
+            return _fillCategoriesPostgreSQLResponse;
         }
     }
 }
