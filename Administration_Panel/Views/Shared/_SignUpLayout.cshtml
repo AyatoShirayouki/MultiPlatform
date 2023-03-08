@@ -31,8 +31,36 @@
     <link href="~/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="~/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+    <!-- Other CSS -->
+    <link rel="stylesheet" href="~/css/site.css"/>
 </head>
 <body class="">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3 navbar-transparent mt-4">
+        <div class="container">
+            <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 text-white" href="#">
+                Administration Panel
+            </a>
+            <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon mt-2">
+                    <span class="navbar-toggler-bar bar1"></span>
+                    <span class="navbar-toggler-bar bar2"></span>
+                    <span class="navbar-toggler-bar bar3"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navigation">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link me-2" href="/Authentication/Login">
+                            <i class="fas fa-key opacity-6  me-1"></i>
+                            Sign In
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar -->
     <main class="main-content  mt-0">
         @RenderBody()
     </main>

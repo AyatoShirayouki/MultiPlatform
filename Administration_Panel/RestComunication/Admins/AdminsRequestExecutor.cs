@@ -202,9 +202,9 @@ namespace Administration_Panel.RestComunication.Admins
             return _loginAdminsResponse;
         }
 
-        public async Task<LogoutAdminResponse> LogoutAction(HttpClient httpClient, string requestQuery)
+        public async Task<LogoutAdminsResponse> LogoutAction(HttpClient httpClient, string requestQuery)
         {
-            LogoutAdminResponse _logoutResponse = new LogoutAdminResponse();
+            LogoutAdminsResponse _logoutResponse = new LogoutAdminsResponse();
 
             using (var response = await httpClient.GetAsync(requestQuery))
             {
@@ -212,7 +212,7 @@ namespace Administration_Panel.RestComunication.Admins
 
                 if (!string.IsNullOrEmpty(apiResponse))
                 {
-                    var convert = JsonConvert.DeserializeObject<LogoutAdminResponse>(apiResponse);
+                    var convert = JsonConvert.DeserializeObject<LogoutAdminsResponse>(apiResponse);
 
                     if (convert != null)
                     {
