@@ -398,7 +398,7 @@ namespace Admins_API.Controllers
 
         [HttpPost]
         [Route("FillCategoriesActionMSSQL")]
-        public async Task<IActionResult> FillCategoriesMSSQL([FromHeader] string token, [FromHeader] string refreshToken)
+        public async Task<IActionResult> FillCategoriesActionMSSQL([FromHeader] string token, [FromHeader] string refreshToken)
         {
             if (token == null || refreshToken == null)
             {
@@ -445,7 +445,7 @@ namespace Admins_API.Controllers
 
         [HttpPost]
         [Route("FillCategoriesActionPostgreSQL")]
-        public async Task<IActionResult> FillCategoriesPostgreSQL([FromHeader] string token, [FromHeader] string refreshToken)
+        public async Task<IActionResult> FillCategoriesActionPostgreSQL([FromHeader] string token, [FromHeader] string refreshToken)
         {
             if (token == null || refreshToken == null)
             {
@@ -466,6 +466,100 @@ namespace Admins_API.Controllers
                     response.Code = 201;
 
                     int result = await AdminsManagementService.FillCategoriesActionPostgreSQL();
+                    if (result == 1)
+                    {
+                        response.Body = "Success";
+                    }
+                    else
+                    {
+                        response.Body = "Failiure";
+                    }
+
+                    HttpContext.Response.Headers.Add("token", jwtAdminToken.Token);
+                    HttpContext.Response.Headers.Add("refreshToken", jwtAdminToken.RefreshToken);
+                }
+                else
+                {
+                    response.Code = 200;
+                }
+
+                response.JwtSuccess = jwtAdminToken.JwtSuccess;
+                response.JwtErrors = jwtAdminToken.JwtErrors;
+            }
+
+            return new JsonResult(response);
+        }
+
+        [HttpPost]
+        [Route("FillPricingPlansAndFeaturesActionMSSQL")]
+        public async Task<IActionResult> FillPricingPlansAndFeaturesActionMSSQL([FromHeader] string token, [FromHeader] string refreshToken)
+        {
+            if (token == null || refreshToken == null)
+            {
+                response.Code = 400;
+                response.Error = "Missing data - token data is incorrect or null";
+
+                return new JsonResult(response);
+            }
+            else
+            {
+                tokenRequest.Token = token;
+                tokenRequest.RefreshToken = refreshToken;
+
+                JwtResult jwtAdminToken = await _authentication.RefreshAdminToken(tokenRequest);
+
+                if (jwtAdminToken.JwtSuccess == true)
+                {
+                    response.Code = 201;
+
+                    int result = await AdminsManagementService.FillPricingPlansAndFeaturesActionMSSQL();
+                    if (result == 1)
+                    {
+                        response.Body = "Success";
+                    }
+                    else
+                    {
+                        response.Body = "Failiure";
+                    }
+
+                    HttpContext.Response.Headers.Add("token", jwtAdminToken.Token);
+                    HttpContext.Response.Headers.Add("refreshToken", jwtAdminToken.RefreshToken);
+                }
+                else
+                {
+                    response.Code = 200;
+                }
+
+                response.JwtSuccess = jwtAdminToken.JwtSuccess;
+                response.JwtErrors = jwtAdminToken.JwtErrors;
+            }
+
+            return new JsonResult(response);
+        }
+
+        [HttpPost]
+        [Route("FillPricingPlansAndFeaturesActionPostgreSQL")]
+        public async Task<IActionResult> FillPricingPlansAndFeaturesActionPostgreSQL([FromHeader] string token, [FromHeader] string refreshToken)
+        {
+            if (token == null || refreshToken == null)
+            {
+                response.Code = 400;
+                response.Error = "Missing data - token data is incorrect or null";
+
+                return new JsonResult(response);
+            }
+            else
+            {
+                tokenRequest.Token = token;
+                tokenRequest.RefreshToken = refreshToken;
+
+                JwtResult jwtAdminToken = await _authentication.RefreshAdminToken(tokenRequest);
+
+                if (jwtAdminToken.JwtSuccess == true)
+                {
+                    response.Code = 201;
+
+                    int result = await AdminsManagementService.FillPricingPlansAndFeaturesActionPostgreSQL();
                     if (result == 1)
                     {
                         response.Body = "Success";

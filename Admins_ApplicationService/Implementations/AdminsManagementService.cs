@@ -265,5 +265,49 @@ namespace Admins_ApplicationService.Implementations
                 return result;
             }
         }
+
+        public static async Task<int> FillPricingPlansAndFeaturesActionMSSQL()
+        {
+            using (AdminsUnitOfWork unitOfWork = new AdminsUnitOfWork())
+            {
+                unitOfWork.BeginTransaction();
+
+                MSSqlScriptExecutor executor = new MSSqlScriptExecutor();
+                int result = await executor.RunPricingPlansAndFeaturesScripts();
+
+                if (result == 1)
+                {
+                    unitOfWork.Commit();
+                }
+                else
+                {
+                    unitOfWork.Rollback();
+                }
+
+                return result;
+            }
+        }
+
+        public static async Task<int> FillPricingPlansAndFeaturesActionPostgreSQL()
+        {
+            using (AdminsUnitOfWork unitOfWork = new AdminsUnitOfWork())
+            {
+                unitOfWork.BeginTransaction();
+
+                PostgreSQLScriptExecutor executor = new PostgreSQLScriptExecutor();
+                int result = await executor.RunPricingPlansAndFeaturesScripts();
+
+                if (result == 1)
+                {
+                    unitOfWork.Commit();
+                }
+                else
+                {
+                    unitOfWork.Rollback();
+                }
+
+                return result;
+            }
+        }
     }
 }

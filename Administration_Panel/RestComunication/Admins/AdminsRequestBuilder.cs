@@ -21,6 +21,8 @@
         {
             return uri + _router.Admins_Delete + $"id={id}";
         }
+
+        //Script Executors
         public string FillCountriesRegionsAndCitiesActionMSSQLRequestBuilder(string uri)
         {
             return uri + _router.Admins_FillCountriesRegionsAndCitiesActionMSSQL;
@@ -36,6 +38,14 @@
         public string FillCategoriesActionPostgreSQLRequestBuilder(string uri)
         {
             return uri + _router.Admins_FillCategoriesActionPostgreSQL;
+        }
+        public string FillPricingPlansAndFeaturesActionMSSQLRequestBuilder(string uri)
+        {
+            return uri + _router.Admins_FillPricingPlansAndFeaturesActionMSSQL;
+        }
+        public string FillPricingPlansAndFeaturesActionPostgreSQLRequestBuilder(string uri)
+        {
+            return uri + _router.Admins_FillPricingPlansAndFeaturesActionPostgreSQL;
         }
 
         //AdminFiles

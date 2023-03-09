@@ -24,6 +24,12 @@ namespace ScriptExecutor.Executors
             string FP = @"E:\Projects\MultiPlatformProject\MultiPlatform\ScriptExecutor\Executors\Scripts\MSSql\Categories";
             return await ExecuteScripts(CS, FP);
         }
+        public async Task<int> RunPricingPlansAndFeaturesScripts()
+        {
+            string CS = GlobalVariables.Freelance_DB_CN;
+            string FP = @"E:\Projects\MultiPlatformProject\MultiPlatform\ScriptExecutor\Executors\Scripts\MSSql\PricingPlans";
+            return await ExecuteScripts(CS, FP);
+        }
         private async Task<int> ExecuteScripts(string ConnectionString, string FilePath)
         {
             bool dropDatabase = false;

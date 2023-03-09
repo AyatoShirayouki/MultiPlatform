@@ -346,7 +346,7 @@ namespace Administration_Panel.RestComunication.Admins
             return _getAdminFilesByIdResponse;
         }
 
-        //Database Actions
+        //Script Executors
         public async Task<FillCountriesRegionsAndCitiesMSSQLResponse> FillCountriesRegionsAndCitiesMSSQLAction(HttpClient httpClient, string requestQuery)
         {
             FillCountriesRegionsAndCitiesMSSQLResponse _fillCountriesRegionsAndCitiesMSSQLResponse = new FillCountriesRegionsAndCitiesMSSQLResponse();
@@ -457,6 +457,62 @@ namespace Administration_Panel.RestComunication.Admins
             }
 
             return _fillCategoriesPostgreSQLResponse;
+        }
+
+        public async Task<FillPricingPlansAndFeaturesMSSQLResponse> FillPricingPlansAndFeaturesMSSQLAction(HttpClient httpClient, string requestQuery)
+        {
+            FillPricingPlansAndFeaturesMSSQLResponse _fillPricingPlansAndFeaturesMSSQLResponse = new FillPricingPlansAndFeaturesMSSQLResponse();
+
+            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+            using (var response = await httpClient.GetAsync(requestQuery))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+                    var convert = JsonConvert.DeserializeObject<FillPricingPlansAndFeaturesMSSQLResponse>(apiResponse);
+
+                    if (convert != null)
+                    {
+                        _fillPricingPlansAndFeaturesMSSQLResponse = convert;
+
+                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                    }
+                }
+            }
+
+            return _fillPricingPlansAndFeaturesMSSQLResponse;
+        }
+
+        public async Task<FillPricingPlansAndFeaturesPostgreSQLResponse> FillPricingPlansAndFeaturesPostgreSQLAction(HttpClient httpClient, string requestQuery)
+        {
+            FillPricingPlansAndFeaturesPostgreSQLResponse _fillPricingPlansAndFeaturesPostgreSQLResponse = new FillPricingPlansAndFeaturesPostgreSQLResponse();
+
+            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+            using (var response = await httpClient.GetAsync(requestQuery))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+                    var convert = JsonConvert.DeserializeObject<FillPricingPlansAndFeaturesPostgreSQLResponse>(apiResponse);
+
+                    if (convert != null)
+                    {
+                        _fillPricingPlansAndFeaturesPostgreSQLResponse = convert;
+
+                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                    }
+                }
+            }
+
+            return _fillPricingPlansAndFeaturesPostgreSQLResponse;
         }
     }
 }
