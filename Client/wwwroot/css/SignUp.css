@@ -1,20 +1,31 @@
-﻿
-#register-account-form {
+﻿.next {
+    min-width: 100%;
+}
+
+.previous {
+    min-width: 100%;
+}
+
+.register-btn {
+    min-width: 100%;
+}
+
+.register-account-form {
     position: relative;
 }
 
-#register-account-form fieldset:not(:first-of-type) {
+.register-account-form fieldset:not(:first-of-type) {
     display: none;
 }
 
-#progressbar {
+.progressbar {
     margin-bottom: 20px;
     overflow: hidden;
     counter-reset: step;
     margin-left: -35px;
 }
 
-    #progressbar li {
+    .progressbar li {
         list-style-type: none;
         color: #2a41e8;
         text-transform: uppercase;
@@ -26,7 +37,7 @@
         font-weight: bold;
     }
 
-        #progressbar li:before {
+        .progressbar li:before {
             content: counter(step);
             counter-increment: step;
             width: 30px;
@@ -40,7 +51,7 @@
             margin: 0 auto 3px auto;
         }
 
-        #progressbar li:after {
+        .progressbar li:after {
             content: '';
             width: 100%;
             height: 2px;
@@ -51,16 +62,12 @@
             z-index: -1;
         }
 
-        #progressbar li:first-child:after {
+        .progressbar li:first-child:after {
             content: none;
         }
 
-        #progressbar li.active:before, #progressbar li.active:after {
+        .progressbar li.active:before, .progressbar li.active:after {
             background: #2a41e8;
             color: white;
         }
 
-
-@media only screen and (max-width: 600px) {
-   
-}
