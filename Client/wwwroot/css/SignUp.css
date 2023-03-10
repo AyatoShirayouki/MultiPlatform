@@ -1,0 +1,66 @@
+﻿
+#register-account-form {
+    position: relative;
+}
+
+#register-account-form fieldset:not(:first-of-type) {
+    display: none;
+}
+
+#progressbar {
+    margin-bottom: 20px;
+    overflow: hidden;
+    counter-reset: step;
+    margin-left: -35px;
+}
+
+    #progressbar li {
+        list-style-type: none;
+        color: #2a41e8;
+        text-transform: uppercase;
+        font-size: 12px;
+        width: 33%;
+        text-align: center;
+        float: left;
+        position: relative;
+        font-weight: bold;
+    }
+
+        #progressbar li:before {
+            content: counter(step);
+            counter-increment: step;
+            width: 30px;
+            text-align: center;
+            line-height: 35px;
+            display: block;
+            font-size: 19px;
+            color: white;
+            background: #6073ff;
+            border-radius: 3px;
+            margin: 0 auto 3px auto;
+        }
+
+        #progressbar li:after {
+            content: '';
+            width: 100%;
+            height: 2px;
+            background: #2a41e8;
+            position: absolute;
+            left: -50%;
+            top: 15.5px;
+            z-index: -1;
+        }
+
+        #progressbar li:first-child:after {
+            content: none;
+        }
+
+        #progressbar li.active:before, #progressbar li.active:after {
+            background: #2a41e8;
+            color: white;
+        }
+
+
+@media only screen and (max-width: 600px) {
+   
+}

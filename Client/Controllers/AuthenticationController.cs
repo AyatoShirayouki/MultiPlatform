@@ -1,16 +1,45 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Client.ViewModels.Authentication;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Client.Controllers
 {
     public class AuthenticationController : Controller
     {
-        public IActionResult Login()
+        [HttpGet]
+        public async Task<IActionResult> Login()
         {
-            return View();
+            LoginVM model = new LoginVM();
+            return View(model);
         }
-        public IActionResult SignUp()
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginVM model)
         {
-            return View();
+            return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> SignUp()
+        {
+            SignUpVM model = new SignUpVM();    
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SignUp(SignUpVM model)
+        {
+            
+            return View(model);
+        }
+
+        /*
+        public async Task<JsonResult> LoadRegionsForCountry(int id)
+        {
+
+        }
+        public async Task<JsonResult> LoadCitiesForRegions(int id)
+        {
+
+        }
+        */
     }
 }

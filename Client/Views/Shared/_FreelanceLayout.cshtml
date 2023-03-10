@@ -9,11 +9,7 @@
     
 	<!-- CSS
 	================================================== -->
-
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Client.styles.css" asp-append-version="true" />
-
+	<link rel="stylesheet" href="~/css/SignUp.css"/>
     <link rel="stylesheet" href="~/Freelance/css/style.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Freelance/css/colors/blue.css" asp-append-version="true" />
 </head>
@@ -403,50 +399,166 @@
 					<div class="welcome-text">
 						<h3>Let's create your account!</h3>
 					</div>
-
-					<!-- Account Type -->
-					<div class="account-type">
-						<div>
-							<input type="radio" name="account-type-radio" id="freelancer-radio" class="account-type-radio" checked/>
-							<label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> Freelancer</label>
-						</div>
-
-						<div>
-							<input type="radio" name="account-type-radio" id="employer-radio" class="account-type-radio"/>
-							<label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Employer</label>
-						</div>
-					</div>
 					
 					<!-- Form -->
-					<form method="post" id="register-account-form">
-						<div class="input-with-icon-left">
-							<i class="icon-material-baseline-mail-outline"></i>
-							<input type="text" class="input-text with-border" name="emailaddress-register" id="emailaddress-register" placeholder="Email Address" required/>
-						</div>
+					<form id="register-account-form" action="/Authentication/SignUp" method="post">
 
-						<div class="input-with-icon-left" title="Should be at least 8 characters long" data-tippy-placement="bottom">
-							<i class="icon-material-outline-lock"></i>
-							<input type="password" class="input-text with-border" name="password-register" id="password-register" placeholder="Password" required/>
-						</div>
+						<!-- progressbar -->
+						<ul id="progressbar">
+							<li class="active">Personal Details</li>
+							<li>Address</li>
+							<li>Additional Information</li>
+						</ul>
 
-						<div class="input-with-icon-left">
-							<i class="icon-material-outline-lock"></i>
-							<input type="password" class="input-text with-border" name="password-repeat-register" id="password-repeat-register" placeholder="Repeat Password" required/>
-						</div>
+						<!-- fieldsets -->
+						<fieldset class="row">
+							<div class="col-12">
+								<!-- Account Type -->
+								<div class="account-type">
+									<div>
+										<input type="radio" name="AccountType" id="freelancer-radio" class="account-type-radio" checked value="1" />
+										<label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> Freelancer</label>
+									</div>
+
+									<div>
+										<input type="radio" name="AccountType" id="employer-radio" class="account-type-radio" value="2" />
+										<label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Employer</label>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-12">
+								<div class="input-with-icon-left">
+									<i class="icon-material-baseline-mail-outline"></i>
+									<input type="email" class="input-text with-border" name="Email" id="emailaddress-register" placeholder="Email Address" required />
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="input-with-icon-left">
+									<i class="icon-material-outline-account-circle"></i>
+									<input type="text" class="input-text with-border" name="FirstName" id="firstName-register" placeholder="First Name" required>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="input-with-icon-left">
+									<i class="icon-material-outline-account-circle"></i>
+									<input type="text" class="input-text with-border" name="LastName" id="lastName-register" placeholder="Last Name" required>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="input-with-icon-left" title="Should be at least 8 characters long" data-tippy-placement="bottom">
+									<i class="icon-material-outline-lock"></i>
+									<input type="password" class="input-text with-border" name="Password" id="password-register" placeholder="Password" required />
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="input-with-icon-left">
+									<i class="icon-material-outline-lock"></i>
+									<input type="password" class="input-text with-border" name="ConfirmPassword" id="password-repeat-register" placeholder="Confirm Password" required />
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="row">
+									<div class="col-6">
+										<div class="section-headline margin-bottom-12">
+											<h5>Gender</h5>
+										</div>
+										<div class="radio">
+											<input id="gender-option-male" name="Gender" type="radio" checked="checked" value="male">
+											<label for="gender-option-male"><span class="radio-label"></span> Male</label>
+										</div>
+										<div class="radio">
+											<input id="gender-option-female" name="Gender" type="radio" value="female">
+											<label for="gender-option-female"><span class="radio-label"></span> Female</label>
+										</div>
+										<div class="radio">
+											<input id="gender-option-other" name="Gender" type="radio" value="other">
+											<label for="gender-option-other"><span class="radio-label"></span> Other</label>
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="input-with-icon-right">
+											<i class="iicon-material-outline-date-range"></i>
+											<input type="date" class="input-date with-border" name="DOB" id="dob-register" placeholder="YYYY/MM/DD" required>
+										</div>
+									</div>
+								</div>
+							</div>
+							<button type="button" name="next" class="next margin-top-10 button button-sliding-icon ripple-effect">
+								Next
+								<i class="icon-material-outline-arrow-right-alt"></i>
+							</button>
+						</fieldset>
+						<fieldset class="row">
+							<div class="col-12">
+								<div class="btn-group bootstrap-select margin-bottom-12 margin-top-12">
+									<select class="selectpicker with-border" data-live-search="true" tabindex="-98">
+										<option>Country1</option>
+										<option>Country1</option>
+										<option>Country1</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="btn-group bootstrap-select margin-bottom-12 margin-top-12">
+									<select class="selectpicker" data-live-search="true" tabindex="-98">
+										<option>Region1</option>
+										<option>Region2</option>
+										<option>Region3</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="btn-group bootstrap-select margin-bottom-12 margin-top-12">
+									<select class="selectpicker" data-live-search="true" tabindex="-98">
+										<option>City1</option>
+										<option>City2</option>
+										<option>City3</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="input-with-icon-left">
+									<i class="icon-material-outline-add-location"></i>
+									<input type="text" class="input-text with-border" name="AddressInfo" id="addressInfo-register" placeholder="Aditional address information" required />
+								</div>
+							</div>
+							<button type="button" name="next" class="next margin-top-10 button button-sliding-icon ripple-effect">
+								Next
+								<i class="icon-material-outline-arrow-right-alt"></i>
+							</button>
+							<button type="button" name="previous" class="previous margin-top-10 button button-sliding-icon ripple-effect">
+								Previous
+								<i class="icon-feather-arrow-left"></i>
+							</button>
+						</fieldset>
+						<fieldset class="row">
+							<div class="input-with-icon-left margin-top-12">
+								<i class="icon-line-awesome-phone"></i>
+								<input type="tel" class="input-text with-border" name="PhoneNumber" id="phoneNumber-register" placeholder="Phone Number" required />
+							</div>
+							<div class="input-with-icon-left">
+								<i class="icon-brand-linkedin-in"></i>
+								<input type="text" class="input-text with-border" name="LinkedInAccount" id="linkedInAccount-register" placeholder="LinkedIn Account" required />
+							</div>
+							<textarea cols="30" rows="5" name="Description" placeholder="Description" class="with-border"></textarea>
+							<button type="button" name="previous" class="previous margin-top-10 button button-sliding-icon ripple-effect">
+								Previous
+								<i class="icon-feather-arrow-left"></i>
+							</button>
+							<!-- Button -->
+							<button class="margin-top-10 button full-width button-sliding-icon ripple-effect" type="submit" form="register-account-form">Register <i class="icon-material-outline-arrow-right-alt"></i></button>
+						</fieldset>
 					</form>
-				
-					<!-- Button -->
-					<button class="margin-top-10 button full-width button-sliding-icon ripple-effect" type="submit" form="register-account-form">Register <i class="icon-material-outline-arrow-right-alt"></i></button>
-				
 					<!-- Social Login -->
-					<div class="social-login-separator"><span>or</span></div>
-					<div class="social-login-buttons">
-						<button class="facebook-login ripple-effect"><i class="icon-brand-facebook-f"></i> Register via Facebook</button>
-						<button class="google-login ripple-effect"><i class="icon-brand-google-plus-g"></i> Register via Google+</button>
+					<div id="bottom-register-options">
+						<div class="social-login-separator"><span>or</span></div>
+						<div class="social-login-buttons">
+							<button class="facebook-login ripple-effect"><i class="icon-brand-facebook-f"></i> Register via Facebook</button>
+							<button class="google-login ripple-effect"><i class="icon-brand-google-plus-g"></i> Register via Google+</button>
+						</div>
 					</div>
-
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -454,11 +566,7 @@
 
 	<!-- Scripts
 	================================================== -->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-	
-
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/Freelance/js/jquery-3.6.0.min.js"></script>
 	<script src="~/Freelance/js/jquery-migrate-3.3.2.min.js"></script>
 	<script src="~/Freelance/js/mmenu.min.js"></script>
@@ -623,6 +731,9 @@
 	<script src="~/Freelance/js/infobox.min.js"></script>
 	<script src="~/Freelance/js/markerclusterer.js"></script>
 	<script src="~/Freelance/js/maps.js"></script>
+
+	<!-- SignUp -->
+	<script src="~/js/SignUp.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
