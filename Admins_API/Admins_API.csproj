@@ -7,6 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Scripts\MSSql\Categories\Script0001 - Bulk_Insert_Categories.sql" />
+    <None Remove="Scripts\MSSql\PricingPlans\Script0001 - Bulk_Insert_PricingPlans.sql" />
+    <None Remove="Scripts\MSSql\PricingPlans\Script0002 - Bulk_Insert_PricingPlanFeatures.sql" />
+    <None Remove="Scripts\PostgreSQL\Categories\Script0001 - Bulk_Insert_Categories.sql" />
+    <None Remove="Scripts\PostgreSQL\PricingPlans\Script0001 - Bulk_Insert_PricingPlans.sql" />
+    <None Remove="Scripts\PostgreSQL\PricingPlans\Script0002 - Bulk_Insert_PricingPlanFeatures.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\MSSql\Categories\Script0001 - Bulk_Insert_Categories.sql" />
+    <EmbeddedResource Include="Scripts\MSSql\PricingPlans\Script0001 - Bulk_Insert_PricingPlans.sql" />
+    <EmbeddedResource Include="Scripts\MSSql\PricingPlans\Script0002 - Bulk_Insert_PricingPlanFeatures.sql" />
+    <EmbeddedResource Include="Scripts\PostgreSQL\Categories\Script0001 - Bulk_Insert_Categories.sql" />
+    <EmbeddedResource Include="Scripts\PostgreSQL\PricingPlans\Script0001 - Bulk_Insert_PricingPlans.sql" />
+    <EmbeddedResource Include="Scripts\PostgreSQL\PricingPlans\Script0002 - Bulk_Insert_PricingPlanFeatures.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />

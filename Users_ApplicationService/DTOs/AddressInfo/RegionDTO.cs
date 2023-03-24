@@ -10,7 +10,11 @@ namespace Users_ApplicationService.DTOs.AddressInfo
 {
     public class RegionDTO : BaseEntity
     {
-        public string? Name { get; set; }
-        public int CountryId { get; set; }
-    }
+		public string? Name { get; set; }
+		public int CountryId { get; set; }
+		public string? CountryCode { get; set; }
+		public string? Type { get; set; }
+		public decimal Latitude { get; set; }
+		public decimal Longitude { get; set; }
+	}
 }

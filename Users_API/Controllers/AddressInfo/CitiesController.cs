@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Linq;
 using Users_ApplicationService.DTOs.AddressInfo;
 using Users_ApplicationService.Implementations;
 using Users_ApplicationService.Implementations.AddressInfo;
@@ -158,6 +159,35 @@ namespace Users_API.Controllers.AddressInfo
         }
 
         [HttpGet]
+        [Route("GetCitiesByRegionAndCountryId")]
+        public async Task<IActionResult> GetCitiesByRegionAndCountryId(int regionId, int countryId)
+        {
+			if (regionId == 0 || countryId == 0)
+			{
+				response.Code = 400;
+				response.Error = "Missing data - Ids are 0 or null";
+
+				return new JsonResult(response);
+			}
+            else
+            {
+                response.Body = await CitiesManagementService.GetCitiesByRegionAndCountryId(regionId, countryId);
+
+                if (response.Body != null)
+                {
+					response.Code = 201;
+				}
+                else
+                {
+					response.Code = 200;
+                    response.Error = "Service returned null.";
+				}
+            }
+
+			return new JsonResult(response);
+		}
+
+		[HttpGet]
         [Route("GetById")]
         public async Task<IActionResult> GetById(int id, [FromHeader] string token, [FromHeader] string refreshToken)
         {

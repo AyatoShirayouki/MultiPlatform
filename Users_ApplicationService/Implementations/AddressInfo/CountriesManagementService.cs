@@ -32,9 +32,25 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                         countriesDTO.Add(new CountryDTO
                         {
                             Id = item.Id,
-                            Name = item.Name,
-                            Code = item.Code,
-                            Language = item.Language
+                            Name = item.name,
+                            Iso3 = item.iso3,
+                            NumericCode = item.numeric_code,
+                            Iso2 = item.iso2,
+                            PhoneCode = item.phonecode,
+                            Capital = item.capital,
+                            Currency = item.currency,
+                            CurrencyName = item.currency_name,
+                            CurrencySymbol = item.currency_symbol,
+                            Tld = item.tld,
+                            Native = item.native,
+                            Region = item.region,
+                            Subregion = item.subregion,
+                            Timezones = item.timezones,
+                            Translations = item.translations,
+                            Latitude = item.latitude,
+                            Longitude = item.longitude,
+                            Emoji = item.emoji,
+                            EmojiU = item.emojiU
                         });
                     }
 
@@ -62,11 +78,27 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                 if (country != null)
                 {
                     countryDTO.Id = country.Id;
-                    countryDTO.Name = country.Name;
-                    countryDTO.Code = country.Code;
-                    countryDTO.Language = country.Language;
+                    countryDTO.Name = country.name;
+					countryDTO.Iso3 = country.iso3;
+                    countryDTO.NumericCode = country.numeric_code;
+                    countryDTO.Iso2 = country.iso2;
+                    countryDTO.PhoneCode = country.phonecode;
+                    countryDTO.Capital = country.capital;
+                    countryDTO.Currency = country.currency;
+                    countryDTO.CurrencyName = country.currency_name;
+                    countryDTO.CurrencySymbol = country.currency_symbol;
+                    countryDTO.Tld = country.tld;
+                    countryDTO.Native = country.native;
+                    countryDTO.Region = country.region;
+                    countryDTO.Subregion = country.subregion;
+                    countryDTO.Timezones = country.timezones;
+                    countryDTO.Translations = country.translations;
+                    countryDTO.Latitude = country.latitude;
+                    countryDTO.Longitude = country.longitude;
+                    countryDTO.Emoji = country.emoji;
+                    countryDTO.EmojiU = country.emojiU;
 
-                    unitOfWork.Commit();
+					unitOfWork.Commit();
                 }
                 else
                 {
@@ -82,7 +114,7 @@ namespace Users_ApplicationService.Implementations.AddressInfo
             {
                 unitOfWork.BeginTransaction();
                 CountriesRepository countriesRepo = new CountriesRepository();
-                Country country = await countriesRepo.GetFirstOrDefault(u => u.Name.Contains(name));
+                Country country = await countriesRepo.GetFirstOrDefault(u => u.name.Contains(name));
                 CountryDTO countryDTO = new CountryDTO();
 
                 if (country != null)
@@ -90,10 +122,26 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                     countryDTO = new CountryDTO
                     {
                         Id = country.Id,
-                        Name = country.Name,
-                        Code = country.Code,
-                        Language = country.Language
-                    };
+                        Name = country.name,
+						Iso3 = country.iso3,
+						NumericCode = country.numeric_code,
+						Iso2 = country.iso2,
+						PhoneCode = country.phonecode,
+						Capital = country.capital,
+						Currency = country.currency,
+						CurrencyName = country.currency_name,
+						CurrencySymbol = country.currency_symbol,
+						Tld = country.tld,
+						Native = country.native,
+						Region = country.region,
+						Subregion = country.subregion,
+						Timezones = country.timezones,
+						Translations = country.translations,
+						Latitude = country.latitude,
+						Longitude = country.longitude,
+						Emoji = country.emoji,
+						EmojiU = country.emojiU
+					};
 
                     unitOfWork.Commit();
                 }
@@ -120,20 +168,52 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                     {
                         country = new Country
                         {
-                            Name = countryDTO.Name,
-                            Code = countryDTO.Code,
-                            Language = countryDTO.Language
-                        };
+                            name = countryDTO.Name,
+							iso3 = countryDTO.Iso3,
+							numeric_code = countryDTO.NumericCode,
+							iso2 = countryDTO.Iso2,
+							phonecode = countryDTO.PhoneCode,
+							capital = countryDTO.Capital,
+							currency = countryDTO.Currency,
+							currency_name = countryDTO.CurrencyName,
+							currency_symbol = countryDTO.CurrencySymbol,
+							tld = countryDTO.Tld,
+							native = countryDTO.Native,
+							region = countryDTO.Region,
+							subregion = countryDTO.Subregion,
+							timezones = countryDTO.Timezones,
+							translations = countryDTO.Translations,
+							latitude = countryDTO.Latitude,
+							longitude = countryDTO.Longitude,
+							emoji = countryDTO.Emoji,
+							emojiU = countryDTO.EmojiU
+						};
                     }
                     else
                     {
                         country = new Country
                         {
                             Id = countryDTO.Id,
-                            Name = countryDTO.Name,
-                            Code = countryDTO.Code,
-                            Language = countryDTO.Language
-                        };
+							name = countryDTO.Name,
+							iso3 = countryDTO.Iso3,
+							numeric_code = countryDTO.NumericCode,
+							iso2 = countryDTO.Iso2,
+							phonecode = countryDTO.PhoneCode,
+							capital = countryDTO.Capital,
+							currency = countryDTO.Currency,
+							currency_name = countryDTO.CurrencyName,
+							currency_symbol = countryDTO.CurrencySymbol,
+							tld = countryDTO.Tld,
+							native = countryDTO.Native,
+							region = countryDTO.Region,
+							subregion = countryDTO.Subregion,
+							timezones = countryDTO.Timezones,
+							translations = countryDTO.Translations,
+							latitude = countryDTO.Latitude,
+							longitude = countryDTO.Longitude,
+							emoji = countryDTO.Emoji,
+							emojiU = countryDTO.EmojiU
+						};
                     }
 
                     await countriesRepo.Save(country);
@@ -168,10 +248,10 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                         await addressesRepo.Delete(address);
                     }
 
-                    List<Region> regions = await regionsRepo.GetAll(c => c.CountryId == country.Id);
+                    List<Region> regions = await regionsRepo.GetAll(c => c.country_id == country.Id);
                     foreach (var region in regions)
                     {
-                        List<City> cities = await citiesRepo.GetAll(s => s.RegionId == region.Id);
+                        List<City> cities = await citiesRepo.GetAll(s => s.region_id == region.Id);
                         foreach (var city in cities)
                         {
                             await citiesRepo.Delete(city);

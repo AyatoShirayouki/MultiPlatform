@@ -62,17 +62,41 @@ namespace UsersData.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("country_code")
+                        .IsRequired()
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)");
+
+                    b.Property<int>("country_id")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("latitude")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("longitude")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("name")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("RegionId")
+                    b.Property<int>("region_code")
+                        .HasMaxLength(2)
                         .HasColumnType("int");
+
+                    b.Property<int>("region_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("wikiDataId")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RegionId");
+                    b.HasIndex("country_id");
+
+                    b.HasIndex("region_id");
 
                     b.ToTable("Cities");
                 });
@@ -85,20 +109,80 @@ namespace UsersData.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)");
+                    b.Property<string>("capital")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("Language")
-                        .IsRequired()
+                    b.Property<string>("currency")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("currency_name")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("currency_symbol")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("emoji")
+                        .HasMaxLength(191)
+                        .HasColumnType("nvarchar(191)");
+
+                    b.Property<string>("emojiU")
+                        .HasMaxLength(191)
+                        .HasColumnType("nvarchar(191)");
+
+                    b.Property<string>("iso2")
                         .HasMaxLength(3)
                         .HasColumnType("nvarchar(3)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("iso3")
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
+
+                    b.Property<decimal>("latitude")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("longitude")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("name")
                         .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("native")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("numeric_code")
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
+
+                    b.Property<string>("phonecode")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("region")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("subregion")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("timezones")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<string>("tld")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("translations")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.HasKey("Id");
 
@@ -113,17 +197,32 @@ namespace UsersData.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CountryId")
+                    b.Property<string>("country_code")
+                        .IsRequired()
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)");
+
+                    b.Property<int>("country_id")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
+                    b.Property<decimal>("latitude")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("longitude")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("name")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<string>("type")
+                        .HasMaxLength(191)
+                        .HasColumnType("nvarchar(191)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CountryId");
+                    b.HasIndex("country_id");
 
                     b.ToTable("Regions");
                 });
@@ -467,11 +566,19 @@ namespace UsersData.Migrations
 
             modelBuilder.Entity("Users_Data.Entities.AddressInfo.City", b =>
                 {
-                    b.HasOne("Users_Data.Entities.AddressInfo.Region", "ParentRegion")
+                    b.HasOne("Users_Data.Entities.AddressInfo.Country", "ParentCountry")
                         .WithMany()
-                        .HasForeignKey("RegionId")
+                        .HasForeignKey("country_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Users_Data.Entities.AddressInfo.Region", "ParentRegion")
+                        .WithMany()
+                        .HasForeignKey("region_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ParentCountry");
 
                     b.Navigation("ParentRegion");
                 });
@@ -480,7 +587,7 @@ namespace UsersData.Migrations
                 {
                     b.HasOne("Users_Data.Entities.AddressInfo.Country", "ParentCountry")
                         .WithMany()
-                        .HasForeignKey("CountryId")
+                        .HasForeignKey("country_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

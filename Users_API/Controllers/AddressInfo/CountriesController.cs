@@ -36,9 +36,22 @@ namespace Users_API.Controllers.AddressInfo
 
         [HttpGet]
         [Route("GetAll")]
-        public async Task<IActionResult> GetAll([FromHeader] string token, [FromHeader] string refreshToken)
+        public async Task<IActionResult> GetAll()
         {
-            if (token != null && refreshToken != null)
+			response.Body = await CountriesManagementService.GetAll();
+
+            if (response.Body != null)
+            {
+                response.Code = 201;
+            }
+            else
+            {
+                response.Code = 200;
+                response.Error = "Service returned null";
+            }
+
+            /*
+			if (token != null && refreshToken != null)
             {
                 tokenRequest.Token = token;
                 tokenRequest.RefreshToken = refreshToken;
@@ -90,6 +103,7 @@ namespace Users_API.Controllers.AddressInfo
                 response.Code = 400;
                 response.Error = "Missing data - Token or refresh token is null or invalid!";
             }
+            */
             return new JsonResult(response);
         }
 

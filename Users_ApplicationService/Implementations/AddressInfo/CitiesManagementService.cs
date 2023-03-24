@@ -1,6 +1,8 @@
 ﻿using Base.ManagementService;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -32,8 +34,14 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                         citiesDTO.Add(new CityDTO
                         {
                             Id = item.Id,
-                            Name = item.Name,
-                            RegionId = item.RegionId
+                            Name = item.name,
+                            RegionId = item.region_id,
+                            RegionCode = item.region_code,
+                            CountryId = item.country_id,
+                            CountryCode = item.country_code,
+                            Latitude = item.latitude,
+                            Longitude = item.longitude,
+                            WikiDataId = item.wikiDataId
                         });
                     }
 
@@ -61,10 +69,17 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                 if (city != null)
                 {
                     cityDTO.Id = city.Id;
-                    cityDTO.Name = city.Name;
-                    cityDTO.RegionId = city.RegionId;
+                    cityDTO.Name = city.name;
+                    cityDTO.RegionId = city.region_id;
+					cityDTO.RegionCode = city.region_code;
+                    cityDTO.CountryId = city.country_id;
+                    cityDTO.CountryCode = city.country_code;
+                    cityDTO.Latitude = city.latitude;
+                    cityDTO.Longitude = city.longitude;
+                    cityDTO.WikiDataId = city.wikiDataId;
 
-                    unitOfWork.Commit();
+
+					unitOfWork.Commit();
                 }
                 else
                 {
@@ -74,31 +89,47 @@ namespace Users_ApplicationService.Implementations.AddressInfo
             }
         }
 
-        public static async Task<CityDTO> GetCityByName(string name)
+        public static async Task<List<CityDTO>> GetCitiesByRegionAndCountryId(int regionId, int countryId)
         {
             using (UsersUnitOfWork unitOfWork = new UsersUnitOfWork())
             {
                 unitOfWork.BeginTransaction();
+
                 CitiesRepository citiesRepo = new CitiesRepository();
-                City city = await citiesRepo.GetFirstOrDefault(u => u.Name.Contains(name));
-                CityDTO cityDTO = new CityDTO();
+                RegionsRepository regionsRepo = new RegionsRepository();
 
-                if (city != null)
+				List<Region> regions = new List<Region>();
+                
+                List<City> cities = await citiesRepo.GetAll(c => c.region_id == regionId && c.country_id == countryId);
+
+                List<CityDTO> cityDTOs = new List<CityDTO>();
+
+                if (cities != null)
                 {
-                    cityDTO = new CityDTO
+                    for (int i = 0; i < cities.Count; i++)
                     {
-                        Id = city.Id,
-                        Name = city.Name,
-                        RegionId = city.RegionId,
-                    };
+						CityDTO cityDTO = new CityDTO
+						{
+							Id = cities[i].Id,
+							Name = cities[i].name,
+							RegionId = cities[i].region_id,
+							RegionCode = cities[i].region_code,
+							CountryId = cities[i].country_id,
+							CountryCode = cities[i].country_code,
+							Latitude = cities[i].latitude,
+							Longitude = cities[i].longitude,
+							WikiDataId = cities[i].wikiDataId
+						};
 
+                        cityDTOs.Add(cityDTO);
+					}
                     unitOfWork.Commit();
                 }
                 else
                 {
                     unitOfWork.Rollback();
                 }
-                return cityDTO;
+                return cityDTOs;
             }
         }
 
@@ -122,8 +153,14 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                         {
                             city = new City
                             {
-                                Name = cityDTO.Name,
-                                RegionId = cityDTO.RegionId,
+                                name = cityDTO.Name,
+                                region_id = cityDTO.RegionId,
+                                region_code = cityDTO.RegionCode,
+                                country_id = cityDTO.CountryId,
+                                country_code = cityDTO.CountryCode,
+                                latitude = cityDTO.Latitude,
+                                longitude = cityDTO.Longitude,
+                                wikiDataId = cityDTO.WikiDataId
                             };
                         }
                         else
@@ -131,9 +168,15 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                             city = new City
                             {
                                 Id = cityDTO.Id,
-                                Name = cityDTO.Name,
-                                RegionId = cityDTO.RegionId,
-                            };
+                                name = cityDTO.Name,
+                                region_id = cityDTO.RegionId,
+								region_code = cityDTO.RegionCode,
+								country_id = cityDTO.CountryId,
+								country_code = cityDTO.CountryCode,
+								latitude = cityDTO.Latitude,
+								longitude = cityDTO.Longitude,
+								wikiDataId = cityDTO.WikiDataId
+							};
                         }
 
                         await citiesRepo.Save(city);

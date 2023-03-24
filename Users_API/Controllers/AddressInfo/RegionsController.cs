@@ -158,6 +158,35 @@ namespace Users_API.Controllers.AddressInfo
         }
 
         [HttpGet]
+        [Route("GetRegionsByCountryId")]
+        public async Task<IActionResult> GetRegionsByCountryId(int id)
+        {
+            if (id == 0)
+            {
+				response.Code = 400;
+				response.Error = "Missing data - Id is null or 0";
+
+				return new JsonResult(response);
+			}
+            else
+            {
+                response.Body = await RegionsManagementService.GetRegionsByCountryId(id);
+
+                if (response.Body != null)
+                {
+					response.Code = 201;
+				}
+                else
+                {
+					response.Code = 200;
+                    response.Error = "Server returned null.";
+				}
+            }
+
+			return new JsonResult(response);
+		}
+
+		[HttpGet]
         [Route("GetById")]
         public async Task<IActionResult> GetById(int id, [FromHeader] string token, [FromHeader] string refreshToken)
         {

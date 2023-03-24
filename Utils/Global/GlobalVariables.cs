@@ -9,7 +9,7 @@ namespace Utils.Global
     public class GlobalVariables
     {
         public static string Admins_DB_CN = "Data Source=AKIHIRO\\SQLEXPRESS;TrustServerCertificate=True;initial catalog=AdminsDb;user id=alex;password=rexibexi1";
-        public static string Users_DB_CN = "Data Source=AKIHIRO\\SQLEXPRESS;TrustServerCertificate=True;initial catalog=UsersDb;user id=alex;password=rexibexi1";
+        public static string Users_DB_CN = "Data Source=AKIHIRO\\SQLEXPRESS;TrustServerCertificate=True;initial catalog=UsersDb; user id=alex;password=rexibexi1";
         public static string Freelance_DB_CN = "Data Source=AKIHIRO\\SQLEXPRESS;TrustServerCertificate=True;initial catalog=FreelanceDb;user id=alex;password=rexibexi1";
         public static string JWT_Encription_Key = "llvudfvkwvepwkdnsnwmuulyvtrawppf";
         public static string PasswordEncriptionKey = "strongpass";

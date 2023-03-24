@@ -31,8 +31,9 @@ namespace Client.ViewModels.Authentication
         public string? LinkedInAccount { get; set; }
         public bool IsCompany { get; set; }
         public string? CompanyName { get; set; }
+        public string? AddressInfo { get; set; }
 
-        [Required(ErrorMessage = "This field is required!")]
+		[Required(ErrorMessage = "This field is required!")]
         public int AccountType { get; set; }
 
         [Required(ErrorMessage = "This field is required!")]

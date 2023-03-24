@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Users_Data.Entities.AddressInfo
 {
@@ -13,11 +14,21 @@ namespace Users_Data.Entities.AddressInfo
     {
         [MaxLength(255)]
         [Required]
-        public string? Name { get; set; }
-        [Required]
-        public int CountryId { get; set; }
 
-        [ForeignKey("CountryId")]
+        public string? name { get; set; }
+        [Required]
+        public int country_id { get; set; }
+
+		[Required]
+		[MaxLength(2)]
+		public string? country_code { get; set; }
+
+		[MaxLength(191)]
+		public string? type { get; set; }
+        public decimal latitude { get; set; }
+		public decimal longitude { get; set; }
+
+		[ForeignKey("country_id")]
         public Country? ParentCountry { get; set; }
     }
 }

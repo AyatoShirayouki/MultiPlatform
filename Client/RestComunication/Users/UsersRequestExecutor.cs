@@ -233,8 +233,8 @@ namespace Client.RestComunication.Users
         {
             GetAllCountriesResponse _getAllCountriesRespponse = new GetAllCountriesResponse();
 
-            httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
-            httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+            //httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+            //httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
 
             using (var response = await httpClient.GetAsync(requestQuery))
             {
@@ -248,8 +248,8 @@ namespace Client.RestComunication.Users
                     {
                         _getAllCountriesRespponse = convert;
 
-                        _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
-                        _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+                        //_session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+                        //_session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
                     }
                 }
             }
@@ -377,7 +377,7 @@ namespace Client.RestComunication.Users
         }
         public async Task<DeleteRegionsResponse> DeleteRegionsAction(HttpClient httpClient, string requestQuery)
         {
-            DeleteRegionsResponse _deleteCityResponse = new DeleteRegionsResponse();
+            DeleteRegionsResponse _deleteRegionsResponse = new DeleteRegionsResponse();
 
             httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
             httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
@@ -392,7 +392,7 @@ namespace Client.RestComunication.Users
 
                     if (convert != null)
                     {
-                        _deleteCityResponse = convert;
+						_deleteRegionsResponse = convert;
 
                         _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
                         _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
@@ -400,7 +400,7 @@ namespace Client.RestComunication.Users
                 }
             }
 
-            return _deleteCityResponse;
+            return _deleteRegionsResponse;
         }
         public async Task<SaveRegionsResponse> SaveRegionsAction(HttpClient httpClient, CityDTO request, string requestQuery)
         {
@@ -440,7 +440,7 @@ namespace Client.RestComunication.Users
         }
         public async Task<GetRegionsByIdResponse> GetRegionsByIdAction(HttpClient httpClient, string requestQuery)
         {
-            GetRegionsByIdResponse _getCityByIdResponse = new GetRegionsByIdResponse();
+            GetRegionsByIdResponse _getRegionsByIdResponse = new GetRegionsByIdResponse();
 
             httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
             httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
@@ -455,7 +455,7 @@ namespace Client.RestComunication.Users
 
                     if (convert != null)
                     {
-                        _getCityByIdResponse = convert;
+						_getRegionsByIdResponse = convert;
 
                         _session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
                         _session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
@@ -463,11 +463,32 @@ namespace Client.RestComunication.Users
                 }
             }
 
-            return _getCityByIdResponse;
+            return _getRegionsByIdResponse;
         }
+		public async Task<GetRegionsByCountryIdResponse> GetRegionsByCountryIdAction(HttpClient httpClient, string requestQuery)
+		{
+			GetRegionsByCountryIdResponse _getRegionsByCountryIdResponse = new GetRegionsByCountryIdResponse();
 
-        //Cities
-        public async Task<GetAllCitiesResponse> GetAllCitiesAction(HttpClient httpClient, string requestQuery)
+			using (var response = await httpClient.GetAsync(requestQuery))
+			{
+				string apiResponse = await response.Content.ReadAsStringAsync();
+
+				if (!string.IsNullOrEmpty(apiResponse))
+				{
+					var convert = JsonConvert.DeserializeObject<GetRegionsByCountryIdResponse>(apiResponse);
+
+					if (convert != null)
+					{
+						_getRegionsByCountryIdResponse = convert;
+					}
+				}
+			}
+
+			return _getRegionsByCountryIdResponse;
+		}
+
+		//Cities
+		public async Task<GetAllCitiesResponse> GetAllCitiesAction(HttpClient httpClient, string requestQuery)
         {
             GetAllCitiesResponse _getAllCitiesRespponse = new GetAllCitiesResponse();
 
@@ -584,9 +605,30 @@ namespace Client.RestComunication.Users
 
             return _getCityByIdResponse;
         }
+		public async Task<GetCitiesByRegionAndCountryIdResponse> GetCitiesByRegionAndCountryIdAction(HttpClient httpClient, string requestQuery)
+		{
+			GetCitiesByRegionAndCountryIdResponse _getCitiesByRegionAndCountryIdResponse = new GetCitiesByRegionAndCountryIdResponse();
 
-        //Users
-        public async Task<GetAllUsersResponse> GetAllUsersAction(HttpClient httpClient, string requestQuery)
+			using (var response = await httpClient.GetAsync(requestQuery))
+			{
+				string apiResponse = await response.Content.ReadAsStringAsync();
+
+				if (!string.IsNullOrEmpty(apiResponse))
+				{
+					var convert = JsonConvert.DeserializeObject<GetCitiesByRegionAndCountryIdResponse>(apiResponse);
+
+					if (convert != null)
+					{
+						_getCitiesByRegionAndCountryIdResponse = convert;
+					}
+				}
+			}
+
+			return _getCitiesByRegionAndCountryIdResponse;
+		}
+
+		//Users
+		public async Task<GetAllUsersResponse> GetAllUsersAction(HttpClient httpClient, string requestQuery)
         {
             GetAllUsersResponse _getAllUsersRespponse = new GetAllUsersResponse();
 

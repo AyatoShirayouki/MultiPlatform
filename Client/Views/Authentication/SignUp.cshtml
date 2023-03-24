@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Client.ViewModels.Authentication.SignUpVM
+@{
 	Layout = "_FreelanceLayout";
 	ViewData["Title"] = "SignUp";
 }
@@ -10,13 +11,13 @@
 		<div class="row">
 			<div class="col-md-12">
 
-				<h2>Register</h2>
+				<h2>SignUp</h2>
 
 				<!-- Breadcrumbs -->
 				<nav id="breadcrumbs" class="dark">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li>Register</li>
+						<li>SignUp</li>
 					</ul>
 				</nav>
 
@@ -55,26 +56,42 @@
 								<!-- Account Type -->
 								<div class="account-type">
 									<div>
-										<input type="radio" name="AccountType" id="freelancer-signup-radio" class="account-type-radio" checked value="1" />
-										<label for="freelancer-signup-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> Freelancer</label>
+										<input type="radio" name="AccountType" id="freelancer-signup-radio" class="signup-account-type-freelancer account-type-radio" checked value="1" />
+										<label for="freelancer-signup-radio" class="ripple-effect-dark"><span class="radio-label"></span> Freelancer</label>
 									</div>
 
 									<div>
-										<input type="radio" name="AccountType" id="employer-signup-radio" class="account-type-radio" value="2" />
-										<label for="employer-signup-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Employer</label>
+										<input type="radio" name="AccountType" id="employer-signup-radio" class="signup-account-type-employer account-type-radio" value="2" />
+										<label for="employer-signup-radio" class="ripple-effect-dark"><span class="radio-label"></span> Employer</label>
 									</div>
 								</div>
+								<div class="radio-group-account-type margin-bottom-20">
+									<div class="radio">
+										<input type="radio" id="register-user-chekcbox-page" name="IsCompany" class="register-user-chekcbox" value="false" checked="checked">
+										<label for="register-user-chekcbox-page"><span class="radio-label"></span> Register as a user</label>
+									</div>
+									<br>
+									<div class="radio">
+										<input type="radio" id="register-company-checkbox-page" name="IsCompany" class="register-company-chekcbox" value="true">
+										<label for="register-company-checkbox-page"><span class="radio-label"></span> Register as a company</label>
+									</div>
+								</div>
+								
 								<div class="input-with-icon-left">
 									<i class="icon-material-baseline-mail-outline"></i>
 									<input type="email" class="input-text with-border" name="Email" id="emailaddress-register-page" placeholder="Email Address" required />
 								</div>
 								<div class="input-with-icon-left">
-									<i class="icon-material-outline-account-circle"></i>
-									<input type="text" class="input-text with-border" name="FirstName" id="firstName-register-page" placeholder="First Name" required>
+									<i class="icon-material-outline-business-center"></i>
+									<input type="text" class="input-text with-border companyName-register" name="CompanyName" id="companyName-register-page" placeholder="Company Name" required>
 								</div>
 								<div class="input-with-icon-left">
 									<i class="icon-material-outline-account-circle"></i>
-									<input type="text" class="input-text with-border" name="LastName" id="lastName-register-page" placeholder="Last Name" required>
+									<input type="text" class="input-text with-border firstName-register" name="FirstName" id="firstName-register-page" placeholder="First Name" required>
+								</div>
+								<div class="input-with-icon-left">
+									<i class="icon-material-outline-account-circle"></i>
+									<input type="text" class="input-text with-border lastName-register" name="LastName" id="lastName-register-page" placeholder="Last Name" required>
 								</div>
 								<div class="input-with-icon-left" title="Should be at least 8 characters long" data-tippy-placement="bottom">
 									<i class="icon-material-outline-lock"></i>
@@ -84,7 +101,7 @@
 									<i class="icon-material-outline-lock"></i>
 									<input type="password" class="input-text with-border" name="ConfirmPassword" id="password-repeat-register-page" placeholder="Confirm Password" required />
 								</div>
-								<div class="row">
+								<div class="row gender-and-birthdate">
 									<div class="col-6">
 										<div class="section-headline margin-bottom-12">
 											<h5>Gender</h5>
@@ -103,6 +120,9 @@
 										</div>
 									</div>
 									<div class="col-6">
+										<div class="section-headline margin-bottom-1">
+											<h5>Date of birth</h5>
+										</div>
 										<div class="input-with-icon-right">
 											<i class="iicon-material-outline-date-range"></i>
 											<input type="date" class="input-date with-border" name="DOB" id="dob-register-page" placeholder="YYYY/MM/DD" required>
@@ -117,25 +137,26 @@
 						</fieldset>
 						<fieldset class="row">
 							<div class="col-lg-12">
-								<div class="btn-group bootstrap-select margin-bottom-12 margin-top-12">
-									<select class="selectpicker with-border" data-live-search="true" tabindex="-98">
-										<option>Country1</option>
-										<option>Country1</option>
-										<option>Country1</option>
+								<div class="section-headline">
+										<h5>Country</h5>
+									</div>
+								<div id="selectCountriesOuther" class="btn-group bootstrap-select margin-bottom-12 margin-top-5">
+									<select id="countriesList" class="selectpicker with-border" data-live-search="true" tabindex="-98">
+										<option value="0">Nothing selected</option>
 									</select>
 								</div>
-								<div class="btn-group bootstrap-select margin-bottom-12 margin-top-12">
-									<select class="selectpicker" data-live-search="true" tabindex="-98">
-										<option>Region1</option>
-										<option>Region2</option>
-										<option>Region3</option>
+								<div class="section-headline">
+									<h5>State</h5>
+								</div>
+								<div id="selectRegionsOuther" class="btn-group bootstrap-select margin-bottom-12 margin-top-5">
+									<select id="regionsList" class="selectpicker" data-live-search="true" tabindex="-98">
 									</select>
 								</div>
-								<div class="btn-group bootstrap-select margin-bottom-12 margin-top-12">
-									<select class="selectpicker" data-live-search="true" tabindex="-98">
-										<option>City1</option>
-										<option>City2</option>
-										<option>City3</option>
+								<div class="section-headline">
+									<h5>City</h5>
+								</div>
+								<div id="selectCitiesOuther" class="btn-group bootstrap-select margin-bottom-15 margin-top-5">
+									<select id="citiesList" class="selectpicker" data-live-search="true" tabindex="-98">
 									</select>
 								</div>
 								<div class="input-with-icon-left">

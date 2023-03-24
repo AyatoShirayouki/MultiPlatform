@@ -19,20 +19,22 @@
         public string Countries_Save = "/api/Countries/Save";
         public string Countries_Delete = "/api/Countries/Delete?";
 
-        //Regions
-        public string Regions_GetAll = "/api/Regions/GetAll";
+		//Regions
+		public string Regions_GetAll = "/api/Regions/GetAll";
         public string Regions_GetById = "/api/Regions/GetById?";
         public string Regions_Save = "/api/Regions/Save";
         public string Regions_Delete = "/api/Regions/Delete?";
+		public string Regions_GetRegionsByCountryId = "/api/Regions/GetRegionsByCountryId?";
 
-        //Cities
-        public string Cities_GetAll = "/api/Cities/GetAll";
+		//Cities
+		public string Cities_GetAll = "/api/Cities/GetAll";
         public string Cities_GetById = "/api/Cities/GetById?";
         public string Cities_Save = "/api/Cities/Save";
         public string Cities_Delete = "/api/Cities/Delete?";
+		public string Cities_GetCitiesByRegionAndCountryId = "/api/Cities/GetCitiesByRegionAndCountryId?";
 
-        //Degrees
-        public string Degrees_GetAll = "/api/Degrees/GetAll";
+		//Degrees
+		public string Degrees_GetAll = "/api/Degrees/GetAll";
         public string Degrees_GetById = "/api/Degrees/GetById?";
         public string Degrees_Save = "/api/Degrees/Save";
         public string Degrees_Delete = "/api/Degrees/Delete?";

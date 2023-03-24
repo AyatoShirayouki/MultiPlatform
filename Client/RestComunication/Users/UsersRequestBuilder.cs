@@ -92,9 +92,13 @@
         {
             return uri + _router.Regions_GetById + $"id={id}";
         }
+		public string GetRegionsByCountryIdRequestBuilder(string uri, int id)
+		{
+			return uri + _router.Regions_GetRegionsByCountryId + $"id={id}";
+		}
 
-        //Cities
-        public string DeleteCitiesByIdRequestBuilder(string uri, int id)
+		//Cities
+		public string DeleteCitiesByIdRequestBuilder(string uri, int id)
         {
             return uri + _router.Cities_Delete + $"id={id}";
         }
@@ -110,9 +114,13 @@
         {
             return uri + _router.Cities_GetById + $"id={id}";
         }
+		public string GetCitiesByRegionAndCountryIdRequestBuilder(string uri, int regionId, int countryId)
+		{
+			return uri + _router.Cities_GetCitiesByRegionAndCountryId + $"regionId={regionId}&countryId={countryId}";
+		}
 
-        //Addresses
-        public string DeleteAddressesByIdRequestBuilder(string uri, int id)
+		//Addresses
+		public string DeleteAddressesByIdRequestBuilder(string uri, int id)
         {
             return uri + _router.Addresses_Delete + $"id={id}";
         }

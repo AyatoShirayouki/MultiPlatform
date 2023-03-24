@@ -31,8 +31,12 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                         RegionsDTO.Add(new RegionDTO
                         {
                             Id = item.Id,
-                            Name = item.Name,
-                            CountryId = item.CountryId
+                            Name = item.name,
+                            CountryId = item.country_id,
+                            CountryCode = item.country_code,
+                            Type = item.type,
+                            Latitude = item.latitude,
+                            Longitude = item.longitude
                         });
                     }
 
@@ -60,10 +64,14 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                 if (Region != null)
                 {
                     RegionDTO.Id = Region.Id;
-                    RegionDTO.Name = Region.Name;
-                    RegionDTO.CountryId = Region.CountryId;
+                    RegionDTO.Name = Region.name;
+                    RegionDTO.CountryId = Region.country_id;
+					RegionDTO.CountryCode = Region.country_code;
+                    RegionDTO.Type = Region.type;
+                    RegionDTO.Latitude = Region.latitude;
+                    RegionDTO.Longitude = Region.longitude;
 
-                    unitOfWork.Commit();
+					unitOfWork.Commit();
                 }
                 else
                 {
@@ -73,23 +81,37 @@ namespace Users_ApplicationService.Implementations.AddressInfo
             }
         }
 
-        public static async Task<RegionDTO> GetRegionByName(string name)
+        public static async Task<List<RegionDTO>> GetRegionsByCountryId(int id)
         {
             using (UsersUnitOfWork unitOfWork = new UsersUnitOfWork())
             {
                 unitOfWork.BeginTransaction();
-                RegionsRepository RegionsRepo = new RegionsRepository();
-                Region Region = await RegionsRepo.GetFirstOrDefault(u => u.Name.Contains(name));
-                RegionDTO RegionDTO = new RegionDTO();
 
-                if (Region != null)
+                RegionsRepository RegionsRepo = new RegionsRepository();
+
+                List<Region> r = await RegionsRepo.GetAll();
+
+                List<Region> Regions = await RegionsRepo.GetAll(u => u.country_id == id);
+                List<RegionDTO> RegionDTOs = new List<RegionDTO>();
+
+                if (Regions != null)
                 {
-                    RegionDTO = new RegionDTO
+                    for (int i = 0; i < Regions.Count; i++)
                     {
-                        Id = Region.Id,
-                        Name = Region.Name,
-                        CountryId = Region.CountryId
-                    };
+						RegionDTO regionDTO = new RegionDTO
+						{
+							Id = Regions[i].Id,
+							Name = Regions[i].name,
+							CountryId = Regions[i].country_id,
+							CountryCode = Regions[i].country_code,
+							Type = Regions[i].type,
+							Latitude = Regions[i].latitude,
+							Longitude = Regions[i].longitude
+						};
+
+                        RegionDTOs.Add(regionDTO);
+					}
+                    
 
                     unitOfWork.Commit();
                 }
@@ -97,7 +119,7 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                 {
                     unitOfWork.Rollback();
                 }
-                return RegionDTO;
+                return RegionDTOs;
             }
         }
 
@@ -116,8 +138,12 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                     {
                         Region = new Region
                         {
-                            Name = RegionDTO.Name,
-                            CountryId = RegionDTO.CountryId
+                            name = RegionDTO.Name,
+                            country_id = RegionDTO.CountryId,
+                            country_code = RegionDTO.CountryCode,
+                            type = RegionDTO.Type,
+                            latitude = RegionDTO.Latitude,
+                            longitude = RegionDTO.Longitude
                         };
                     }
                     else
@@ -125,9 +151,13 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                         Region = new Region
                         {
                             Id = RegionDTO.Id,
-                            Name = RegionDTO.Name,
-                            CountryId = RegionDTO.CountryId
-                        };
+                            name = RegionDTO.Name,
+                            country_id = RegionDTO.CountryId,
+							country_code = RegionDTO.CountryCode,
+							type = RegionDTO.Type,
+							latitude = RegionDTO.Latitude,
+							longitude = RegionDTO.Longitude,
+						};
                     }
 
                     await RegionsRepo.Save(Region);
@@ -161,7 +191,7 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                         await addressesRepo.Delete(address);
                     }
 
-                    List<City> cities = await citiesRepo.GetAll(s => s.RegionId == Region.Id);
+                    List<City> cities = await citiesRepo.GetAll(s => s.region_id == Region.Id);
                     foreach (var city in cities)
                     {
                             await citiesRepo.Delete(city);
