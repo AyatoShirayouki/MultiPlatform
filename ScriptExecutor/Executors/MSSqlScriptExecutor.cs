@@ -214,8 +214,8 @@ namespace ScriptExecutor.Executors
 							command.Parameters.AddWithValue("@native", country[i].native);
 							command.Parameters.AddWithValue("@region", country[i].region);
 							command.Parameters.AddWithValue("@subregion", country[i].subregion);
-							command.Parameters.AddWithValue("@timezones", JsonConvert.SerializeObject(country[i].timezones));
-							command.Parameters.AddWithValue("@translations", JsonConvert.SerializeObject(country[i].translations));
+							command.Parameters.AddWithValue("@timezones", country[i].timezones);
+							command.Parameters.AddWithValue("@translations", country[i].translations);
 							command.Parameters.AddWithValue("@latitude", country[i].latitude);
 							command.Parameters.AddWithValue("@longitude", country[i].longitude);
 							command.Parameters.AddWithValue("@emoji", country[i].emoji);
