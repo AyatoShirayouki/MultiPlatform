@@ -78,10 +78,62 @@ $(".previous").click(function () {
 	});
 });
 
-/*
-$(".submit").click(function () {
-	return false;
-})
-*/
-
 //--------------------------------General animations and visual functionality-------------------------------------
+
+//--------------------------------GLoading Countries Regions and Cities | Hiding and showing elemnts depending on user type-------------------------------------
+
+	$('.radio-group-account-type').hide();
+	$('.companyName-register').hide();
+
+	$('.signup-account-type-employer').change(function () {
+		if ($('.signup-account-type-employer').is(':checked')) {
+			$('.radio-group-account-type').show();
+		}
+		else {
+			$('.radio-group-account-type').hide();
+		}
+	});
+	$('.signup-account-type-freelancer').change(function () {
+		if ($('.signup-account-type-freelancer').is(':checked')) {
+			$('.radio-group-account-type').hide();
+			if ($('.register-company-chekcbox').is(':checked')) {
+				$('.register-company-chekcbox').prop('checked', false);
+				$('.register-user-chekcbox').prop('checked', true);
+				$('.companyName-register').hide();
+				$('.firstName-register').show();
+				$('.lastName-register').show();
+				$('.gender-and-birthdate').show();
+			}
+		}
+		else {
+			$('.radio-group-account-type').show();
+		}
+	});
+	$('.register-company-chekcbox').change(function () {
+		if ($('.register-company-chekcbox').is(':checked')) {
+			$('.companyName-register').show();
+			$('.firstName-register').hide();
+			$('.lastName-register').hide();
+			$('.gender-and-birthdate').hide();
+		}
+		else {
+			$('.companyName-register').hide();
+			$('.firstName-register').show();
+			$('.lastName-register').show();
+			$('.gender-and-birthdate').show();
+		}
+	});
+	$('.register-user-chekcbox').change(function () {
+		if ($('.register-user-chekcbox').is(':checked')) {
+			$('.companyName-register').hide();
+			$('.firstName-register').show();
+			$('.lastName-register').show();
+			$('.gender-and-birthdate').show();
+		}
+		else {
+			$('.companyName-register').show();
+			$('.firstName-register').hide();
+			$('.lastName-register').hide();
+			$('.gender-and-birthdate').hide();
+		}
+	});

@@ -418,13 +418,24 @@
 								<!-- Account Type -->
 								<div class="account-type">
 									<div>
-										<input type="radio" name="AccountType" id="freelancer-radio" class="account-type-radio" checked value="1" />
+										<input type="radio" name="AccountType" id="freelancer-radio" class="signup-account-type-freelancer account-type-radio" checked value="1" />
 										<label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> Freelancer</label>
 									</div>
 
 									<div>
-										<input type="radio" name="AccountType" id="employer-radio" class="account-type-radio" value="2" />
+										<input type="radio" name="AccountType" id="employer-radio" class="signup-account-type-employer account-type-radio" value="2" />
 										<label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Employer</label>
+									</div>
+								</div>
+								<div class="radio-group-account-type margin-bottom-20">
+									<div class="radio">
+										<input type="radio" id="register-user-chekcbox-page" name="IsCompany" class="register-user-chekcbox" value="false" checked="checked">
+										<label for="register-user-chekcbox-page"><span class="radio-label"></span> Register as a user</label>
+									</div>
+									<br>
+									<div class="radio">
+										<input type="radio" id="register-company-checkbox-page" name="IsCompany" class="register-company-chekcbox" value="true">
+										<label for="register-company-checkbox-page"><span class="radio-label"></span> Register as a company</label>
 									</div>
 								</div>
 								<div class="input-with-icon-left">
@@ -432,12 +443,16 @@
 									<input type="email" class="input-text with-border" name="Email" id="emailaddress-register" placeholder="Email Address" required />
 								</div>
 								<div class="input-with-icon-left">
-									<i class="icon-material-outline-account-circle"></i>
-									<input type="text" class="input-text with-border" name="FirstName" id="firstName-register" placeholder="First Name" required>
+									<i class="icon-material-outline-business-center"></i>
+									<input type="text" class="input-text with-border companyName-register" name="CompanyName" id="companyName-register-page" placeholder="Company Name" required>
 								</div>
 								<div class="input-with-icon-left">
 									<i class="icon-material-outline-account-circle"></i>
-									<input type="text" class="input-text with-border" name="LastName" id="lastName-register" placeholder="Last Name" required>
+									<input type="text" class="input-text with-border firstName-register" name="FirstName" id="firstName-register" placeholder="First Name" required>
+								</div>
+								<div class="input-with-icon-left">
+									<i class="icon-material-outline-account-circle"></i>
+									<input type="text" class="input-text with-border lastName-register" name="LastName" id="lastName-register" placeholder="Last Name" required>
 								</div>
 								<div class="input-with-icon-left" title="Should be at least 8 characters long" data-tippy-placement="bottom">
 									<i class="icon-material-outline-lock"></i>
@@ -447,7 +462,7 @@
 									<i class="icon-material-outline-lock"></i>
 									<input type="password" class="input-text with-border" name="ConfirmPassword" id="password-repeat-register" placeholder="Confirm Password" required />
 								</div>
-								<div class="row">
+								<div class="row gender-and-birthdate">
 									<div class="col-6">
 										<div class="section-headline margin-bottom-12">
 											<h5>Gender</h5>
@@ -466,6 +481,9 @@
 										</div>
 									</div>
 									<div class="col-6">
+										<div class="section-headline margin-bottom-1">
+											<h5>Date of birth</h5>
+										</div>
 										<div class="input-with-icon-right">
 											<i class="iicon-material-outline-date-range"></i>
 											<input type="date" class="input-date with-border" name="DOB" id="dob-register" placeholder="YYYY/MM/DD" required>
@@ -481,25 +499,26 @@
 						</fieldset>
 						<fieldset class="row">
 							<div class="col-lg-12">
-								<div class="btn-group bootstrap-select margin-bottom-12 margin-top-12">
-									<select class="selectpicker with-border" data-live-search="true" tabindex="-98">
-										<option>Country1</option>
-										<option>Country1</option>
-										<option>Country1</option>
+								<div class="section-headline">
+									<h5>Country</h5>
+								</div>
+								<div id="selectCountriesOuther-popup" class="btn-group bootstrap-select margin-bottom-12 margin-top-12">
+									<select id="countriesList-popup" name="CountryId" class="selectpicker with-border" data-live-search="true" tabindex="-98">
+										<option value="0">Nothing selected</option>
 									</select>
 								</div>
-								<div class="btn-group bootstrap-select margin-bottom-12 margin-top-12">
-									<select class="selectpicker" data-live-search="true" tabindex="-98">
-										<option>Region1</option>
-										<option>Region2</option>
-										<option>Region3</option>
+								<div class="section-headline">
+									<h5>State</h5>
+								</div>
+								<div id="selectRegionsOuther-popup" class="btn-group bootstrap-select margin-bottom-12 margin-top-12">
+									<select id="regionsList-popup" name="RegionId" class="selectpicker" data-live-search="true" tabindex="-98">
 									</select>
 								</div>
-								<div class="btn-group bootstrap-select margin-bottom-12 margin-top-12">
-									<select class="selectpicker" data-live-search="true" tabindex="-98">
-										<option>City1</option>
-										<option>City2</option>
-										<option>City3</option>
+								<div class="section-headline">
+									<h5>City</h5>
+								</div>
+								<div id="selectCitiesOuther-popup" class="btn-group bootstrap-select margin-bottom-12 margin-top-12">
+									<select id="citiesList-popup" name="CityId" class="selectpicker" data-live-search="true" tabindex="-98">
 									</select>
 								</div>
 								<div class="input-with-icon-left">
@@ -727,66 +746,9 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-			$('.radio-group-account-type').hide();
-			$('.companyName-register').hide();
-
-			$('.signup-account-type-employer').change(function(){
-				if ($('.signup-account-type-employer').is(':checked')) {
-					$('.radio-group-account-type').show();
-				}
-				else{
-					$('.radio-group-account-type').hide();
-				}
-			});
-			$('.signup-account-type-freelancer').change(function () {
-				if ($('.signup-account-type-freelancer').is(':checked')) {
-					$('.radio-group-account-type').hide();
-					if ($('.register-company-chekcbox').is(':checked')) {
-						$('.register-company-chekcbox').prop('checked', false);
-						$('.register-user-chekcbox').prop('checked', true);
-						$('.companyName-register').hide();
-						$('.firstName-register').show();
-						$('.lastName-register').show();
-						$('.gender-and-birthdate').show();
-					}
-				}
-				else {
-					$('.radio-group-account-type').show();
-				}
-			});
-			$('.register-company-chekcbox').change(function(){
-				if ($('.register-company-chekcbox').is(':checked')) {
-					$('.companyName-register').show();
-					$('.firstName-register').hide();
-					$('.lastName-register').hide();
-					$('.gender-and-birthdate').hide();
-				}
-				else{
-					$('.companyName-register').hide();
-					$('.firstName-register').show();
-					$('.lastName-register').show();
-					$('.gender-and-birthdate').show();
-				}
-			});
-			$('.register-user-chekcbox').change(function () {
-				if ($('.register-user-chekcbox').is(':checked')) {
-					$('.companyName-register').hide();
-					$('.firstName-register').show();
-					$('.lastName-register').show();
-					$('.gender-and-birthdate').show();
-				}
-				else {
-					$('.companyName-register').show();
-					$('.firstName-register').hide();
-					$('.lastName-register').hide();
-					$('.gender-and-birthdate').hide();
-				}
-			});
-			
-
 			$.ajax({
                 type: 'GET',
-				url: '@Url.Action("LoadAllCountries")',
+				url: '/Authentication/LoadAllCountries',
                 dataType: 'json',
 			    data: null,
                 success: function (countries) {
@@ -794,7 +756,11 @@
 					$.each(countries, function (i, country) {
 						index = i + 1;
 						$('#selectCountriesOuther').find('ul').append('<li data-original-index="' + index + '"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">' + country.name + '</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>');
-						$("#countriesList").append('<option value="' + country.id + '">' + country.name + '</option>');
+						$('#countriesList').append('<option value="' + country.id + '">' + country.name + '</option>');
+
+						//popup
+						$('#selectCountriesOuther-popup').find('ul').append('<li data-original-index="' + index + '"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">' + country.name + '</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>');
+						$('#countriesList-popup').append('<option value="' + country.id + '">' + country.name + '</option>');
 					});
                 },
                 error: function (ex) {
@@ -802,84 +768,133 @@
                 }
             });
 
-            $("#countriesList").change(function () {
-                $("#regionsList").empty();
+			function loadRegions() {
+				$('#regionsList').empty();
 
 				$('#selectRegionsOuther').find('ul').empty();
 				$('#selectRegionsOuther').find('.filter-option').text('Nothing selected');
 				$('#selectRegionsOuther').find('button').attr('title', 'Nothing selected');
 
-				$("#citiesList").empty();
+				$('#citiesList').empty();
 
 				$('#selectCitiesOuther').find('ul').empty();
 				$('#selectCitiesOuther').find('.filter-option').text('Nothing selected');
 				$('#selectCitiesOuther').find('button').attr('title', 'Nothing selected');
 
-                $.ajax({
-                    type: 'GET',
-					url: '@Url.Action("LoadRegionsForCountry")',
-                    dataType: 'json',
-					data: { id: $("#countriesList").val() },
-                    success: function (regions) {
+				//popup
+				$('#regionsList-popup').empty();
+
+				$('#selectRegionsOuther-popup').find('ul').empty();
+				$('#selectRegionsOuther-popup').find('.filter-option').text('Nothing selected');
+				$('#selectRegionsOuther-popup').find('button').attr('title', 'Nothing selected');
+
+				$('#citiesList-popup').empty();
+
+				$('#selectCitiesOuther-popup').find('ul').empty();
+				$('#selectCitiesOuther-popup').find('.filter-option').text('Nothing selected');
+				$('#selectCitiesOuther-popup').find('button').attr('title', 'Nothing selected');
+
+				$.ajax({
+					type: 'GET',
+					url: '/Authentication/LoadRegionsForCountry',
+					dataType: 'json',
+					data: { id: $('select[name="CountryId"]').val() },
+					success: function (regions) {
 						let other;
 						let IDs;
 						let index;
 						if (regions.length > 1) {
 							$('#selectRegionsOuther').find('ul').append('<li data-original-index="0" class="selected"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Nothing selected</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>');
-							$("#regionsList").append('<option value="0">Nothing selected</option>');
+							$('#regionsList').append('<option value="0">Nothing selected</option>');
+
+							//popup
+							$('#selectRegionsOuther-popup').find('ul').append('<li data-original-index="0" class="selected"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Nothing selected</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>');
+							$('#regionsList-popup').append('<option value="0">Nothing selected</option>');
 							$.each(regions, function (i, region) {
 								index = i + 1;
 								if (region.name.includes("Other") == false) {
 									$('#selectRegionsOuther').find('ul').append('<li data-original-index="' + index + '"><a tabindex="0" class="" data-tokens="null" role="option" ari-disabled="false" aria-selected="false"><span class="text">' + region.name + '</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>');
+									$('#regionsList').append('<option value="' + region.id + '">' + region.name + '</option>');
 
-									$("#regionsList").append('<option value="' + region.id + '">' + region.name + '</option>');
+									//popup
+									$('#selectRegionsOuther-popup').find('ul').append('<li data-original-index="' + index + '"><a tabindex="0" class="" data-tokens="null" role="option" ari-disabled="false" aria-selected="false"><span class="text">' + region.name + '</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>');
+									$('#regionsList-popup').append('<option value="' + region.id + '">' + region.name + '</option>');
 								}
-								else{
+								else {
 									other = region.name.split("-")[0];
 									IDs = region.name.split("-")[1];
 
 									$('#selectRegionsOuther').find('ul').append('<li data-original-index="' + index + '"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">' + other + '</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>');
-									$("#regionsList").append('<option value="' + IDs + '">' + other + '</option>');
+									$('#regionsList').append('<option value="' + IDs + '">' + other + '</option>');
+
+									//popup
+									$('#selectRegionsOuther-popup').find('ul').append('<li data-original-index="' + index + '"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">' + other + '</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>');
+									$('#regionsList-popup').append('<option value="' + IDs + '">' + other + '</option>');
 								}
 							});
 						}
-                        else{
+						else {
 							other = regions[0].name.split("-")[0];
 							IDs = regions[0].name.split("-")[1];
 
 							$('#selectRegionsOuther').find('ul').append('<li data-original-index="0" class="selected"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Nothing selected</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>');
 							$('#selectRegionsOuther').find('ul').append('<li data-original-index="' + 1 + '"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">' + other + '</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>');
 
-							$("#regionsList").append('<option value="0">Nothing selected</option>');
-							$("#regionsList").append('<option value="' + IDs + '">' + other + '</option>');
-						}
-                    },
-                    error: function (ex) {
-                        console.log(ex)
-                    }
-                });
-                return false;
-            });
+							$('#regionsList').append('<option value="0">Nothing selected</option>');
+							$('#regionsList').append('<option value="' + IDs + '">' + other + '</option>');
 
-			$("#regionsList").change(function () {
+							//popup
+							$('#selectRegionsOuther-popup').find('ul').append('<li data-original-index="0" class="selected"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Nothing selected</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>');
+							$('#selectRegionsOuther-popup').find('ul').append('<li data-original-index="' + 1 + '"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">' + other + '</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>');
+
+							$('#regionsList-popup').append('<option value="0">Nothing selected</option>');
+							$('#regionsList-popup').append('<option value="' + IDs + '">' + other + '</option>');
+						}
+					},
+					error: function (ex) {
+						console.log(ex)
+					}
+				});
+				return false;
+			}
+
+			$("#countriesList").change(loadRegions);
+			$("#countriesList-popup").change(loadRegions);
+
+			function loadCities() {
 				$("#citiesList").empty();
 
 				$('#selectCitiesOuther').find('ul').empty();
 				$('#selectCitiesOuther').find('.filter-option').text('Nothing selected');
 				$('#selectCitiesOuther').find('button').attr('title', 'Nothing selected');
 
+				//popup
+				$("#citiesList-popup").empty();
+
+				$('#selectCitiesOuther-popup').find('ul').empty();
+				$('#selectCitiesOuther-popup').find('.filter-option').text('Nothing selected');
+				$('#selectCitiesOuther-popup').find('button').attr('title', 'Nothing selected');
+
 				$.ajax({
 					type: 'GET',
-					url: '@Url.Action("LoadCitiesForRegionAndCountry")',
+					url: '/Authentication/LoadCitiesForRegionAndCountry',
 					dataType: 'json',
-					data: { regionId: $("#regionsList").val(), countryId: $("#countriesList").val() },
+					data: { regionId: $('select[name="RegionId"]').val(), countryId: $('select[name="CountryId"]').val() },
 					success: function (cities) {
 						$('#selectCitiesOuther').find('ul').append('<li data-original-index="0" class="selected"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Nothing selected</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>');
 						$("#citiesList").append('<option value="0">Nothing selected</option>');
+
+						//popup
+						$('#selectCitiesOuther-popup').find('ul').append('<li data-original-index="0" class="selected"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Nothing selected</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>');
+						$("#citiesList-popup").append('<option value="0">Nothing selected</option>');
 						$.each(cities, function (i, city) {
 							index = i + 1;
 							$('#selectCitiesOuther').find('ul').append('<li data-original-index="' + index + '"><a tabindex="0" class="" data-tokens="null" role="option" ari-disabled="false" aria-selected="false"><span class="text">' + city.name + '</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>');
 							$("#citiesList").append('<option value="' + city.id + '">' + city.name + '</option>');
+
+							//popup
+							$('#selectCitiesOuther-popup').find('ul').append('<li data-original-index="' + index + '"><a tabindex="0" class="" data-tokens="null" role="option" ari-disabled="false" aria-selected="false"><span class="text">' + city.name + '</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>');
+							$("#citiesList-popup").append('<option value="' + city.id + '">' + city.name + '</option>');
 						});
 					},
 					error: function (ex) {
@@ -887,8 +902,11 @@
 					}
 				});
 				return false;
-			});
-        });
+			}
+
+			$("#regionsList").change(loadCities);
+			$("#regionsList-popup").change(loadCities);
+		});
     </script>
 
 

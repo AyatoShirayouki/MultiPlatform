@@ -39,8 +39,8 @@ namespace Client.ViewModels.Authentication
         [Required(ErrorMessage = "This field is required!")]
         public int AddressId { get; set; }
 
-        public List<CountryDTO> Countries { get; set; }
-        public List<RegionDTO> Regions { get; set; }
-        public List<CityDTO> Cities { get; set; }
+        public int CountryId { get; set; }
+        public int RegionId { get; set; }
+        public int CityId { get; set; } 
     }
 }
