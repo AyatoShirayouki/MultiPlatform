@@ -19,9 +19,9 @@ namespace Users_Data.Entities.AddressInfo
         [Required]
         public int region_id { get; set; }
 
-		[MaxLength(2)]
+		[MaxLength(6)]
 		[Required]
-		public int region_code { get; set; }
+		public string? region_code { get; set; }
 
 		[Required]
 		public int country_id { get; set; }

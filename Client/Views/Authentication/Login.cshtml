@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Client.ViewModels.Authentication.LoginVM
+@{
 	Layout = "_FreelanceLayout";
 	ViewData["Title"] = "Login";
 }
@@ -40,21 +41,26 @@
 				</div>
 
 				<!-- Form -->
-				<form method="post" id="login-form">
+				<form method="post" id="login-form-page">
 					<div class="input-with-icon-left">
 						<i class="icon-material-baseline-mail-outline"></i>
-						<input type="text" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="Email Address" required />
+						<input type="text" class="input-text with-border" name="Email" id="emailaddress-login" placeholder="Email Address"/>
+						@Html.ValidationMessageFor(m => m.Email, null, new {@class = "error" })
+						@Html.ValidationMessage("Email-format", null, new { @class = "error" })
 					</div>
 
 					<div class="input-with-icon-left">
 						<i class="icon-material-outline-lock"></i>
-						<input type="password" class="input-text with-border" name="password" id="password" placeholder="Password" required />
+						<input type="password" class="input-text with-border" name="Password" id="password-login" placeholder="Password"/>
+						@Html.ValidationMessageFor(m => m.Password, null, new {@class = "error" })
 					</div>
 					<a href="#" class="forgot-password">Forgot Password?</a>
+					
 				</form>
 
+				@Html.ValidationMessage("AuthenticationFailed", null, new { @class = "error" })
 				<!-- Button -->
-				<button class="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit" form="login-form">Log In <i class="icon-material-outline-arrow-right-alt"></i></button>
+				<button class="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit" form="login-form-page">Log In <i class="icon-material-outline-arrow-right-alt"></i></button>
 
 				<!-- Social Login -->
 				<div class="social-login-separator"><span>or</span></div>

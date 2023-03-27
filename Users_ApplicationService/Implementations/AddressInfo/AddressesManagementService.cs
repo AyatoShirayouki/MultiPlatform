@@ -238,6 +238,40 @@ namespace Users_ApplicationService.Implementations.AddressInfo
             }
         }
 
+        public static async Task<AddressDTO> GetAddress(int countryId, int regionId, int cityId, string addressInfo)
+        {
+            using (UsersUnitOfWork unitOfWork = new UsersUnitOfWork())
+            {
+                unitOfWork.BeginTransaction();
+
+				AddressDTO result = new AddressDTO();
+
+				if (countryId != 0 && regionId != 0 && cityId != 0 && !string.IsNullOrEmpty(addressInfo))
+                {
+					AddressesRepository addressesRepo = new AddressesRepository(unitOfWork);
+                    Address address = await addressesRepo.GetFirstOrDefault(a => a.CountryId == countryId &&
+                    a.RegionId == regionId && a.CityId == cityId && a.AddressInfo == addressInfo);
+
+                    if (address != null)
+                    {
+                        result.Id= address.Id;
+                        result.CountryId = countryId;
+                        result.RegionId = regionId;
+                        result.CityId = cityId;
+                        result.AddressInfo = addressInfo;
+                    }
+
+					unitOfWork.Commit();
+				}
+                else
+                {
+					unitOfWork.Rollback();
+				}
+
+                return result;  
+			}
+        }
+
         public static async Task Delete(int id)
         {
             using (UsersUnitOfWork unitOfWork = new UsersUnitOfWork())

@@ -12,7 +12,7 @@ namespace Users_ApplicationService.DTOs.AddressInfo
     {
 		public string? Name { get; set; }
 		public int RegionId { get; set; }
-		public int RegionCode { get; set; }
+		public string? RegionCode { get; set; }
 		public int CountryId { get; set; }
 		public string? CountryCode { get; set; }
 		public decimal Latitude { get; set; }

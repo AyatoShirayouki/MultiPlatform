@@ -148,6 +148,7 @@ namespace Admins_API.Controllers
                         Password = password
                     };
 
+                    await _authentication.ClearAllAdminTokens(adminDTO);
                     JwtResult jwtAdminToken = await _authentication.GenerateAdminJwtToken(adminDTO);
 
                     HttpContext.Response.Headers.Add("token", jwtAdminToken.Token);

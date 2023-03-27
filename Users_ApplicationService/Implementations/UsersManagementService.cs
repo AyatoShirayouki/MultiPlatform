@@ -158,11 +158,12 @@ namespace Users_ApplicationService.Implementations
                                 CompanyName = userDTO.CompanyName
                             };
                         }
-                    }
 
-                    await usersRepo.Save(user);
-                    unitOfWork.Commit();
-                }
+						await usersRepo.Save(user);
+
+						unitOfWork.Commit();
+					}
+				}
                 else
                 {
                     unitOfWork.Rollback();

@@ -23,6 +23,8 @@ namespace Users_Data.Entities.AddressInfo
 		[MaxLength(2)]
 		public string? country_code { get; set; }
 
+		public string? state_code { get; set; }
+
 		[MaxLength(191)]
 		public string? type { get; set; }
         public decimal latitude { get; set; }

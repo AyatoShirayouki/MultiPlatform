@@ -34,6 +34,7 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                             Name = item.name,
                             CountryId = item.country_id,
                             CountryCode = item.country_code,
+                            StateCode= item.country_code,
                             Type = item.type,
                             Latitude = item.latitude,
                             Longitude = item.longitude
@@ -67,6 +68,7 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                     RegionDTO.Name = Region.name;
                     RegionDTO.CountryId = Region.country_id;
 					RegionDTO.CountryCode = Region.country_code;
+                    RegionDTO.StateCode = Region.country_code;
                     RegionDTO.Type = Region.type;
                     RegionDTO.Latitude = Region.latitude;
                     RegionDTO.Longitude = Region.longitude;
@@ -104,6 +106,7 @@ namespace Users_ApplicationService.Implementations.AddressInfo
 							Name = Regions[i].name,
 							CountryId = Regions[i].country_id,
 							CountryCode = Regions[i].country_code,
+                            StateCode= Regions[i].country_code,
 							Type = Regions[i].type,
 							Latitude = Regions[i].latitude,
 							Longitude = Regions[i].longitude
@@ -141,6 +144,7 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                             name = RegionDTO.Name,
                             country_id = RegionDTO.CountryId,
                             country_code = RegionDTO.CountryCode,
+                            state_code= RegionDTO.StateCode,
                             type = RegionDTO.Type,
                             latitude = RegionDTO.Latitude,
                             longitude = RegionDTO.Longitude
@@ -154,6 +158,7 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                             name = RegionDTO.Name,
                             country_id = RegionDTO.CountryId,
 							country_code = RegionDTO.CountryCode,
+                            state_code = RegionDTO.StateCode,
 							type = RegionDTO.Type,
 							latitude = RegionDTO.Latitude,
 							longitude = RegionDTO.Longitude,

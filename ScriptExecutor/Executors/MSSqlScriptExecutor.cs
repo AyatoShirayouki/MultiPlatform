@@ -20,9 +20,9 @@ namespace ScriptExecutor.Executors
 			var result = 0;
 
             string CS = GlobalVariables.Users_DB_CN;
-            string countriesFP = @"\Scripts\CountriesRegionsCities\countries.json";
-			string regionsFP = @"\Scripts\CountriesRegionsCities\regions.json";
-			string citiesFP = @"\Scripts\CountriesRegionsCities\cities.json";
+            string countriesFP = @"E:\Projects\MultiPlatformProject\MultiPlatform\Admins_API\Scripts\CountriesRegionsCities\countries.json";
+			string regionsFP = @"E:\Projects\MultiPlatformProject\MultiPlatform\Admins_API\Scripts\CountriesRegionsCities\regions.json";
+			string citiesFP = @"E:\Projects\MultiPlatformProject\MultiPlatform\Admins_API\Scripts\CountriesRegionsCities\cities.json";
 
 			int CountriesResult = await ExecuteCountriesJson(CS, countriesFP);
 			int RegionsResult = await ExecuteRegionsJson(CS, regionsFP);
@@ -42,13 +42,13 @@ namespace ScriptExecutor.Executors
         public async Task<int> RunCategoriesScripts()
         {
             string CS = GlobalVariables.Freelance_DB_CN;
-            string FP = @"\Scripts\MSSql\Categories";
+            string FP = @"E:\Projects\MultiPlatformProject\MultiPlatform\Admins_API\Scripts\MSSql\Categories";
             return await ExecuteScripts(CS, FP);
         }
         public async Task<int> RunPricingPlansAndFeaturesScripts()
         {
-            string CS = GlobalVariables.Freelance_DB_CN;
-            string FP = @"\Scripts\MSSql\PricingPlans";
+            string CS = GlobalVariables.Users_DB_CN;
+            string FP = @"E:\Projects\MultiPlatformProject\MultiPlatform\Admins_API\Scripts\MSSql\PricingPlans";
             return await ExecuteScripts(CS, FP);
         }
 
@@ -135,14 +135,15 @@ namespace ScriptExecutor.Executors
 						{
 							// Define the SQL command
 							string sql = "SET IDENTITY_INSERT [dbo].[Regions] ON" + "\n" +
-								"INSERT INTO [dbo].[Regions] (id, name, country_id, country_code, type, latitude, longitude) " +
-										 "VALUES (@id, @name, @country_id, @country_code, @type, @latitude, @longitude)";
+								"INSERT INTO [dbo].[Regions] (id, name, country_id, state_code, country_code, type, latitude, longitude) " +
+										 "VALUES (@id, @name, @country_id, @state_code, @country_code, @type, @latitude, @longitude)";
 							SqlCommand command = new SqlCommand(sql, connection);
 
 							// Add parameters to the SQL command
 							command.Parameters.AddWithValue("@id", data[i].Id);
 							command.Parameters.AddWithValue("@name", data[i].name);
 							command.Parameters.AddWithValue("@country_id", data[i].country_id);
+							command.Parameters.AddWithValue("@state_code", data[i].state_code);
 							command.Parameters.AddWithValue("@country_code", data[i].country_code);
 							command.Parameters.AddWithValue("@type", data[i].type);
 							command.Parameters.AddWithValue("@latitude", data[i].latitude);

@@ -13,5 +13,6 @@ namespace Users_ApplicationService.DTOs.Authentication
         public int CountryId { get; set; }
         public int RegionId { get; set; }
         public int CityId { get; set; }
+        public string? AddressInfo { get; set; }
     }
 }

@@ -79,27 +79,35 @@
 								
 								<div class="input-with-icon-left">
 									<i class="icon-material-baseline-mail-outline"></i>
-									<input type="email" class="input-text with-border" name="Email" id="emailaddress-register-page" placeholder="Email Address" required />
+									<input type="email" class="input-text with-border" name="Email" id="emailaddress-register-page" placeholder="Email Address"/>
+									@Html.ValidationMessage("Email-empty", null, new { @class = "error" })
+									@Html.ValidationMessage("Email-format", null, new { @class = "error" })
 								</div>
 								<div class="input-with-icon-left">
 									<i class="icon-material-outline-business-center"></i>
-									<input type="text" class="input-text with-border companyName-register" name="CompanyName" id="companyName-register-page" placeholder="Company Name" required>
+									<input type="text" class="input-text with-border companyName-register" name="CompanyName" id="companyName-register-page" placeholder="Company Name">
+									@Html.ValidationMessage("CompanyName-empty", null, new { @class = "error" })
 								</div>
 								<div class="input-with-icon-left">
 									<i class="icon-material-outline-account-circle"></i>
-									<input type="text" class="input-text with-border firstName-register" name="FirstName" id="firstName-register-page" placeholder="First Name" required>
+									<input type="text" class="input-text with-border firstName-register" name="FirstName" id="firstName-register-page" placeholder="First Name">
+									@Html.ValidationMessage("FirstName-empty", null, new { @class = "error" })
 								</div>
 								<div class="input-with-icon-left">
 									<i class="icon-material-outline-account-circle"></i>
-									<input type="text" class="input-text with-border lastName-register" name="LastName" id="lastName-register-page" placeholder="Last Name" required>
+									<input type="text" class="input-text with-border lastName-register" name="LastName" id="lastName-register-page" placeholder="Last Name">
+									@Html.ValidationMessage("LastName-empty", null, new { @class = "error" })
 								</div>
 								<div class="input-with-icon-left" title="Should be at least 8 characters long" data-tippy-placement="bottom">
 									<i class="icon-material-outline-lock"></i>
-									<input type="password" class="input-text with-border" name="Password" id="password-register-page" placeholder="Password" required />
+									<input type="password" class="input-text with-border" name="Password" id="password-register-page" placeholder="Password" />
+									@Html.ValidationMessage("Password-empty", null, new { @class = "error" })
 								</div>
 								<div class="input-with-icon-left">
 									<i class="icon-material-outline-lock"></i>
-									<input type="password" class="input-text with-border" name="ConfirmPassword" id="password-repeat-register-page" placeholder="Confirm Password" required />
+									<input type="password" class="input-text with-border" name="ConfirmPassword" id="password-repeat-register-page" placeholder="Confirm Password" />
+									@Html.ValidationMessage("ConfirmPassword-empty", null, new { @class = "error" })
+									@Html.ValidationMessage("ConfirmPassword-mismatch", null, new { @class = "error" })
 								</div>
 								<div class="row gender-and-birthdate">
 									<div class="col-6">
@@ -125,7 +133,8 @@
 										</div>
 										<div class="input-with-icon-right">
 											<i class="iicon-material-outline-date-range"></i>
-											<input type="date" class="input-date with-border" name="DOB" id="dob-register-page" placeholder="YYYY/MM/DD" required>
+											<input type="date" class="input-date with-border" name="DOB" id="dob-register-page" placeholder="YYYY/MM/DD">
+											@Html.ValidationMessage("DOB-empty", null, new { @class = "error" })
 										</div>
 									</div>
 								</div>
@@ -144,6 +153,7 @@
 									<select id="countriesList" name="CountryId" class="selectpicker with-border countriesList" data-live-search="true" tabindex="-98">
 										<option value="0">Nothing selected</option>
 									</select>
+									@Html.ValidationMessage("CountryId-empty", null, new { @class = "error" })
 								</div>
 								<div class="section-headline">
 									<h5>State</h5>
@@ -151,6 +161,7 @@
 								<div id="selectRegionsOuther" class="btn-group bootstrap-select margin-bottom-12 margin-top-5 selectRegionsOuther">
 									<select id="regionsList" name="RegionId" class="selectpicker with-border regionsList" data-live-search="true" tabindex="-98">
 									</select>
+									@Html.ValidationMessage("RegionId-empty", null, new { @class = "error" })
 								</div>
 								<div class="section-headline">
 									<h5>City</h5>
@@ -158,10 +169,12 @@
 								<div id="selectCitiesOuther" class="btn-group bootstrap-select margin-bottom-15 margin-top-5 selectCitiesOuther">
 									<select id="citiesList" name="CityId" class="selectpicker with-border citiesList" data-live-search="true" tabindex="-98">
 									</select>
+									@Html.ValidationMessage("CityId-empty", null, new { @class = "error" })
 								</div>
 								<div class="input-with-icon-left">
 									<i class="icon-material-outline-add-location"></i>
-									<input type="text" class="input-text with-border" name="AddressInfo" id="addressInfo-register-page" placeholder="Aditional address information" required />
+									<input type="text" class="input-text with-border" name="AddressInfo" id="addressInfo-register-page" placeholder="Aditional address information"/>
+									@Html.ValidationMessage("AddressInfo-empty", null, new { @class = "error" })
 								</div>
 							</div>
 							<button type="button" name="next" class="next margin-top-10 full-width button button-sliding-icon ripple-effect">
@@ -177,11 +190,11 @@
 							<div class="col-lg-12">
 								<div class="input-with-icon-left margin-top-12">
 									<i class="icon-line-awesome-phone"></i>
-									<input type="tel" class="input-text with-border" name="PhoneNumber" id="phoneNumber-register-page" placeholder="Phone Number" required />
+									<input type="tel" class="input-text with-border" name="PhoneNumber" id="phoneNumber-register-page" placeholder="Phone Number" />
 								</div>
 								<div class="input-with-icon-left">
 									<i class="icon-brand-linkedin-in"></i>
-									<input type="text" class="input-text with-border" name="LinkedInAccount" id="linkedInAccount-register-page" placeholder="LinkedIn Account" required />
+									<input type="text" class="input-text with-border" name="LinkedInAccount" id="linkedInAccount-register-page" placeholder="LinkedIn Account" />
 								</div>
 								<textarea cols="30" rows="5" name="Description" placeholder="Description" class="with-border"></textarea>
 							</div>
@@ -190,7 +203,7 @@
 								<i class="icon-feather-arrow-left"></i>
 							</button>
 							<!-- Button -->
-							<button class="margin-top-10 register-btn button button-sliding-icon ripple-effect" type="submit" form="register-account-form">
+							<button class="margin-top-10 register-btn button button-sliding-icon ripple-effect" type="submit" form="register-account-form-page">
 								Register
 								<i class="icon-line-awesome-sign-in"></i>
 							</button>
@@ -199,6 +212,7 @@
 
 					<!-- Social Login -->
 					<div class="social-login-separator"><span>or</span></div>
+					@Html.ValidationMessage("AuthenticationFailed", null, new { @class = "error" })
 					<div class="social-login-buttons">
 						<button class="facebook-login ripple-effect"><i class="icon-brand-facebook-f"></i> Register via Facebook</button>
 						<button class="google-login ripple-effect"><i class="icon-brand-google-plus-g"></i> Register via Google+</button>

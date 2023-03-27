@@ -220,10 +220,7 @@ namespace Users_API.Controllers
         [Route("SignUp")]
         public async Task<IActionResult> SignUp(SignUpDTO signUpDTO)
         {
-            if (signUpDTO.User.FirstName == null || signUpDTO.User.LastName == null
-                || signUpDTO.User.Email == null || signUpDTO.User.Password == null
-                || signUpDTO.CountryId == 0 || signUpDTO.CityId == 0
-                || signUpDTO.RegionId == 0)
+            if (signUpDTO.User.Email == null || signUpDTO.User.Password == null || signUpDTO.CountryId == 0 || signUpDTO.CityId == 0 || signUpDTO.RegionId == 0)
             {
                 response.Code = 400;
                 response.Error = "Missing data - User data is incomplete!";
@@ -241,13 +238,18 @@ namespace Users_API.Controllers
                 {
                     CountryId = signUpDTO.CountryId,
                     CityId = signUpDTO.CityId,
-                    RegionId = signUpDTO.RegionId
+                    RegionId = signUpDTO.RegionId,
+                    AddressInfo = signUpDTO.AddressInfo
                 };
 
                 await AddressesManagementService.Save(addressDTO);
 
-                signUpDTO.User.AddressId = addressDTO.Id;
+                AddressDTO address = await AddressesManagementService.GetAddress(addressDTO.CountryId, addressDTO.RegionId, addressDTO.CityId, addressDTO.AddressInfo);
+
+                signUpDTO.User.AddressId = address.Id;
+                signUpDTO.User.PricingPlanId = 1;
                 signUpDTO.User.Password = StringCipher.Encrypt(signUpDTO.User.Password, GlobalVariables.PasswordEncriptionKey);
+
                 await UsersManagementService.Save(signUpDTO.User);
 
                 response.Code = 201;

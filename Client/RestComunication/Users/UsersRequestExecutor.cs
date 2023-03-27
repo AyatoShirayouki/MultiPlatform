@@ -54,7 +54,7 @@ namespace Client.RestComunication.Users
 
                     if (convert != null)
                     {
-                        _signUpResponse.Code = convert;
+                        _signUpResponse = convert;
                     }
                 }
             }
