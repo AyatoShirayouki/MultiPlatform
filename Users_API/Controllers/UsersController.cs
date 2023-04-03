@@ -242,9 +242,9 @@ namespace Users_API.Controllers
                     AddressInfo = signUpDTO.AddressInfo
                 };
 
-                await AddressesManagementService.Save(addressDTO);
+                int addressId = await AddressesManagementService.Save(addressDTO);
 
-                AddressDTO address = await AddressesManagementService.GetAddress(addressDTO.CountryId, addressDTO.RegionId, addressDTO.CityId, addressDTO.AddressInfo);
+                AddressDTO address = await AddressesManagementService.GetById(addressId);
 
                 signUpDTO.User.AddressId = address.Id;
                 signUpDTO.User.PricingPlanId = 1;

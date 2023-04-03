@@ -11,13 +11,13 @@
 		<div class="row">
 			<div class="col-md-12">
 
-				<h2>SignUp</h2>
+				<h2>Sign Up</h2>
 
 				<!-- Breadcrumbs -->
 				<nav id="breadcrumbs" class="dark">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li>SignUp</li>
+						<li><a href="/Home/Index">Home</a></li>
+						<li>Sign Up</li>
 					</ul>
 				</nav>
 
@@ -36,7 +36,7 @@
 				<!-- Welcome Text -->
 				<div class="welcome-text">
 					<h3 style="font-size: 26px;">Let's create your account!</h3>
-					<span>Already have an account? <a href="pages-login.html">Log In!</a></span>
+					<span>Already have an account? <a href="/Authentication/Login">Log In!</a></span>
 				</div>
 
 				<div class="sign-in-form">
@@ -150,27 +150,27 @@
 									<h5>Country</h5>
 								</div>
 								<div id="selectCountriesOuther" class="btn-group bootstrap-select margin-bottom-12 margin-top-5 selectCountriesOuther">
-									<select id="countriesList" name="CountryId" class="selectpicker with-border countriesList" data-live-search="true" tabindex="-98">
+									<select id="countriesList" name="CountryId" class="selectpicker with-border countriesList" tabindex="-98">
 										<option value="0">Nothing selected</option>
 									</select>
-									@Html.ValidationMessage("CountryId-empty", null, new { @class = "error" })
 								</div>
+								@Html.ValidationMessage("CountryId-empty", null, new { @class = "error" })
 								<div class="section-headline">
 									<h5>State</h5>
 								</div>
 								<div id="selectRegionsOuther" class="btn-group bootstrap-select margin-bottom-12 margin-top-5 selectRegionsOuther">
-									<select id="regionsList" name="RegionId" class="selectpicker with-border regionsList" data-live-search="true" tabindex="-98">
+									<select id="regionsList" name="RegionId" class="selectpicker with-border regionsList" tabindex="-98">
 									</select>
-									@Html.ValidationMessage("RegionId-empty", null, new { @class = "error" })
 								</div>
+								@Html.ValidationMessage("RegionId-empty", null, new { @class = "error" })
 								<div class="section-headline">
 									<h5>City</h5>
 								</div>
 								<div id="selectCitiesOuther" class="btn-group bootstrap-select margin-bottom-15 margin-top-5 selectCitiesOuther">
-									<select id="citiesList" name="CityId" class="selectpicker with-border citiesList" data-live-search="true" tabindex="-98">
+									<select id="citiesList" name="CityId" class="selectpicker with-border citiesList" tabindex="-98">
 									</select>
-									@Html.ValidationMessage("CityId-empty", null, new { @class = "error" })
 								</div>
+								@Html.ValidationMessage("CityId-empty", null, new { @class = "error" })
 								<div class="input-with-icon-left">
 									<i class="icon-material-outline-add-location"></i>
 									<input type="text" class="input-text with-border" name="AddressInfo" id="addressInfo-register-page" placeholder="Aditional address information"/>

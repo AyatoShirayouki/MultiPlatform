@@ -26,6 +26,7 @@ namespace Client.Controllers
         private GetCitiesByRegionAndCountryIdResponse _getCitiesByRegionAndCountryIdResponse;
         private SignUpUserResponse _signUpUserResponse;
 		private LoginUserResponse _loginUserResponse;
+		private LogoutResponse _logoutUserResponse;
 
 		private IConfiguration _configuration;
 		private readonly IHttpContextAccessor _httpContextAccessor;
@@ -45,6 +46,7 @@ namespace Client.Controllers
 			_getCitiesByRegionAndCountryIdResponse = new GetCitiesByRegionAndCountryIdResponse();
             _signUpUserResponse= new SignUpUserResponse();
 			_loginUserResponse= new LoginUserResponse();
+			_logoutUserResponse= new LogoutResponse();
 
             _baseUsersURI = _configuration.GetValue<string>("UsersAPI");
 		}
@@ -65,7 +67,10 @@ namespace Client.Controllers
 			}
 			try
 			{
-				MailAddress m = new MailAddress(model.Email);
+				if (!string.IsNullOrEmpty(model.Email))
+				{
+					MailAddress m = new MailAddress(model.Email);
+				}
 			}
 			catch (FormatException)
 			{
@@ -144,7 +149,7 @@ namespace Client.Controllers
 					ModelState.AddModelError("LastName-empty", "Last Name field is required.");
 					validated = false;
 				}
-				if (model.DOB == DateTime.MinValue)
+				if (model.DOB == DateTime.MinValue || model.DOB == null)
 				{
 					ModelState.AddModelError("DOB-empty", "Date of birth field is required.");
 					validated = false;
@@ -172,7 +177,7 @@ namespace Client.Controllers
 						ModelState.AddModelError("LastName-empty", "Last Name field is required.");
 						validated = false;
 					}
-					if (model.DOB == DateTime.MinValue)
+					if (model.DOB == DateTime.MinValue || model.DOB == null)
 					{
 						ModelState.AddModelError("DOB-empty", "Date of birth field is required.");
 						validated = false;
@@ -221,7 +226,11 @@ namespace Client.Controllers
 			}
 			try
 			{
-				MailAddress m = new MailAddress(model.Email);
+				if (!string.IsNullOrEmpty(model.Email))
+				{
+					MailAddress m = new MailAddress(model.Email);
+				}
+					
 			}
 			catch (FormatException)
 			{
@@ -237,19 +246,24 @@ namespace Client.Controllers
 
 			UserDTO user = new UserDTO
 			{
-				Email= model.Email,//
-				FirstName= model.FirstName,//
-				LastName= model.LastName,//
-				Password= model.Password,//
-				IsCompany= model.IsCompany,///
-				AccountType= model.AccountType,///
-				DOB = model.DOB,//
-				Gender= model.Gender,///
-				LinkedInAccount= model.LinkedInAccount,///
-				PhoneNumber= model.PhoneNumber,///
-				Description= model.Description,///
-				CompanyName= model.CompanyName,///
+				Email = model.Email,
+				FirstName = model.FirstName,
+				LastName = model.LastName,
+				Password = model.Password,
+				IsCompany = model.IsCompany,
+				AccountType= model.AccountType,
+				DOB = model.DOB,
+				Gender = model.Gender,
+				LinkedInAccount = model.LinkedInAccount,
+				PhoneNumber = model.PhoneNumber,
+				Description = model.Description,
+				CompanyName = model.CompanyName,
 			};
+
+			if (user.IsCompany == true)
+			{
+				user.Gender = "";
+			}
 
 			SignUpDTO request = new SignUpDTO();
 
@@ -282,6 +296,42 @@ namespace Client.Controllers
 				return View(model);
 			}
 			
+		}
+
+		public async Task<object> Logout()
+		{
+			if (int.TryParse(this.HttpContext.Session.GetString("Id"), out _))
+			{
+				using (var httpClient = new HttpClient())
+				{
+					int userId = int.Parse(this.HttpContext.Session.GetString("Id").ToString());
+					_logoutUserResponse = await _usersRequestExecutor.LogoutAction(httpClient, _usersRequestBuilder.LogoutRequestBuilder(_baseUsersURI, userId));
+				}
+
+				if (_logoutUserResponse != null && int.Parse(_logoutUserResponse.Code.ToString()) == 201)
+				{
+					this.HttpContext.Session.Remove("Token");
+					this.HttpContext.Session.Remove("RefreshToken");
+					this.HttpContext.Session.Remove("Id");
+					this.HttpContext.Session.Remove("Email");
+					this.HttpContext.Session.Remove("FirstName");
+					this.HttpContext.Session.Remove("LastName");
+					this.HttpContext.Session.Remove("CompanyName");
+					this.HttpContext.Session.Remove("Gender");
+					this.HttpContext.Session.Remove("DOB");
+					this.HttpContext.Session.Remove("AccountType");
+
+					return RedirectToAction("Index", "Home");
+				}
+				else
+				{
+					return RedirectToAction("ErrorPage", "Home");
+				}
+			}
+			else
+			{
+				return null;
+			}
 		}
 
         [HttpGet]

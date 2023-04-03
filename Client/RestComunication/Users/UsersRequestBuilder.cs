@@ -13,7 +13,7 @@
         {
             return uri + _router.Users_SignUp;
         }
-        public string LogoutRequestBuilder(string uri, string userId)
+        public string LogoutRequestBuilder(string uri, int userId)
         {
              return uri + _router.Users_Logout + $"userId={userId}";
         }

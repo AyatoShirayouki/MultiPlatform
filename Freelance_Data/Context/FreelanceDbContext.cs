@@ -32,6 +32,7 @@ namespace Freelance_Data.Context
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<SkillToCategory> SkillsToCategories { get; set; }
+        public DbSet<SkillToUser> SkillToUsers { get; set; }
         public DbSet<Tag> Tags { get; set; }
 
         public DbSet<FileToTask> FilesToTasks { get; set; }

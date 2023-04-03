@@ -13,6 +13,7 @@ using Client.RestComunication.Freelance.Responses.Others.Notes;
 using Client.RestComunication.Freelance.Responses.Others.Reviews;
 using Client.RestComunication.Freelance.Responses.Others.Skills;
 using Client.RestComunication.Freelance.Responses.Others.SkillsToCategories;
+using Client.RestComunication.Freelance.Responses.Others.SkillsToUsers;
 using Client.RestComunication.Freelance.Responses.Others.Tags;
 using Client.RestComunication.Freelance.Responses.TaskRelated.FilesToTasks;
 using Client.RestComunication.Freelance.Responses.TaskRelated.SkillsToTasks;
@@ -1866,8 +1867,130 @@ namespace Client.RestComunication.Freelance
             return _getSkillsToCategoriesByIdResponse;
         }
 
-        //Tags
-        public async Task<GetAllTagsResponse> GetAllTagsAction(HttpClient httpClient, string requestQuery)
+		//SkillsToUsers
+		public async Task<GetAllSkillsToUsersResponse> GetAllSkillsToUsersAction(HttpClient httpClient, string requestQuery)
+		{
+			GetAllSkillsToUsersResponse _getAllSkillsToUsersRespponse = new GetAllSkillsToUsersResponse();
+
+			httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+			httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+			using (var response = await httpClient.GetAsync(requestQuery))
+			{
+				string apiResponse = await response.Content.ReadAsStringAsync();
+
+				if (!string.IsNullOrEmpty(apiResponse))
+				{
+					var convert = JsonConvert.DeserializeObject<GetAllSkillsToUsersResponse>(apiResponse);
+
+					if (convert != null)
+					{
+						_getAllSkillsToUsersRespponse = convert;
+
+						_session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+						_session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+					}
+				}
+			}
+
+			return _getAllSkillsToUsersRespponse;
+		}
+
+		public async Task<DeleteSkillsToUsersResponse> DeleteSkillsToUsersAction(HttpClient httpClient, string requestQuery)
+		{
+			DeleteSkillsToUsersResponse _deleteSkillsToUsersResponse = new DeleteSkillsToUsersResponse();
+
+			httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+			httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+			using (var response = await httpClient.DeleteAsync(requestQuery))
+			{
+				string apiResponse = await response.Content.ReadAsStringAsync();
+
+				if (!string.IsNullOrEmpty(apiResponse))
+				{
+					var convert = JsonConvert.DeserializeObject<DeleteSkillsToUsersResponse>(apiResponse);
+
+					if (convert != null)
+					{
+						_deleteSkillsToUsersResponse = convert;
+
+						_session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+						_session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+					}
+				}
+			}
+
+			return _deleteSkillsToUsersResponse;
+		}
+
+		public async Task<SaveSkillsToUsersResponse> SaveSkillsToUsersAction(HttpClient httpClient, SkillToUserDTO request, string requestQuery)
+		{
+			SaveSkillsToUsersResponse _saveSkillsToUsersResponse = new SaveSkillsToUsersResponse();
+
+			httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+			httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+			httpClient.BaseAddress = new Uri(requestQuery);
+			httpClient.DefaultRequestHeaders.Accept.Clear();
+			httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+			var content = JsonConvert.SerializeObject(request);
+			var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+			var byteContent = new ByteArrayContent(buffer);
+			byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+			using (var response = await httpClient.PostAsync("", byteContent))
+			{
+				string apiResponse = await response.Content.ReadAsStringAsync();
+
+				if (!string.IsNullOrEmpty(apiResponse))
+				{
+					var convert = JsonConvert.DeserializeObject<SaveSkillsToUsersResponse>(apiResponse);
+
+					if (convert != null)
+					{
+						_saveSkillsToUsersResponse = convert;
+
+						_session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+						_session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+					}
+				}
+			}
+
+			return _saveSkillsToUsersResponse;
+		}
+
+		public async Task<GetSkillsToUsersByIdResponse> GetSkillsToUsersByIdAction(HttpClient httpClient, string requestQuery)
+		{
+			GetSkillsToUsersByIdResponse _getSkillsToUsersByIdResponse = new GetSkillsToUsersByIdResponse();
+
+			httpClient.DefaultRequestHeaders.Add("token", _session.GetString("Token"));
+			httpClient.DefaultRequestHeaders.Add("refreshToken", _session.GetString("RefreshToken"));
+
+			using (var response = await httpClient.GetAsync(requestQuery))
+			{
+				string apiResponse = await response.Content.ReadAsStringAsync();
+
+				if (!string.IsNullOrEmpty(apiResponse))
+				{
+					var convert = JsonConvert.DeserializeObject<GetSkillsToUsersByIdResponse>(apiResponse);
+
+					if (convert != null)
+					{
+						_getSkillsToUsersByIdResponse = convert;
+
+						_session.SetString("Token", response.Headers.FirstOrDefault(x => x.Key == "token").Value.FirstOrDefault());
+						_session.SetString("RefreshToken", response.Headers.FirstOrDefault(x => x.Key == "refreshToken").Value.FirstOrDefault());
+					}
+				}
+			}
+
+			return _getSkillsToUsersByIdResponse;
+		}
+
+		//Tags
+		public async Task<GetAllTagsResponse> GetAllTagsAction(HttpClient httpClient, string requestQuery)
         {
             GetAllTagsResponse _getAllTagsRespponse = new GetAllTagsResponse();
 

@@ -400,6 +400,27 @@ namespace FreelanceData.Migrations
                     b.ToTable("SkillsToCategories");
                 });
 
+            modelBuilder.Entity("Freelance_Data.Entities.Others.SkillToUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("SkillId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SkillId");
+
+                    b.ToTable("SkillToUsers");
+                });
+
             modelBuilder.Entity("Freelance_Data.Entities.Others.Tag", b =>
                 {
                     b.Property<int>("Id")
@@ -686,6 +707,17 @@ namespace FreelanceData.Migrations
                         .IsRequired();
 
                     b.Navigation("ParentCategory");
+
+                    b.Navigation("ParentSkill");
+                });
+
+            modelBuilder.Entity("Freelance_Data.Entities.Others.SkillToUser", b =>
+                {
+                    b.HasOne("Freelance_Data.Entities.Others.Skill", "ParentSkill")
+                        .WithMany()
+                        .HasForeignKey("SkillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ParentSkill");
                 });

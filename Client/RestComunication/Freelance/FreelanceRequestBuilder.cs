@@ -274,8 +274,26 @@
             return uri + _router.SkillsToCategories_GetById + $"id={id}";
         }
 
-        //Tags
-        public string DeleteTagsByIdRequestBuilder(string uri, int id)
+		//SkillsToUsers
+		public string DeleteSkillsToUsersByIdRequestBuilder(string uri, int id)
+		{
+			return uri + _router.SkillsToUsers_Delete + $"id={id}";
+		}
+		public string GetAllSkillsToUsersRequestBuilder(string uri)
+		{
+			return uri + _router.SkillsToUsers_GetAll;
+		}
+		public string SaveSkillsToUsersRequestBuilder(string uri)
+		{
+			return uri + _router.SkillsToUsers_Save;
+		}
+		public string GetSkillsToUsersByIdRequestBuilder(string uri, int id)
+		{
+			return uri + _router.SkillsToUsers_GetById + $"id={id}";
+		}
+
+		//Tags
+		public string DeleteTagsByIdRequestBuilder(string uri, int id)
         {
             return uri + _router.Tags_Delete + $"id={id}";
         }

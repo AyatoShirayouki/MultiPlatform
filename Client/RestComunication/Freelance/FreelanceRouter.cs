@@ -92,8 +92,14 @@
         public string SkillsToCategories_Save = "/api/SkillsToCategories/Save";
         public string SkillsToCategories_Delete = "/api/SkillsToCategories/Delete?";
 
-        //Tags
-        public string Tags_GetAll = "/api/Tags/GetAll";
+		//SkillsToUsers
+		public string SkillsToUsers_GetAll = "/api/SkillsToUsers/GetAll";
+		public string SkillsToUsers_GetById = "/api/SkillsToUsers/GetById?";
+		public string SkillsToUsers_Save = "/api/SkillsToUsers/Save";
+		public string SkillsToUsers_Delete = "/api/SkillsToUsers/Delete?";
+
+		//Tags
+		public string Tags_GetAll = "/api/Tags/GetAll";
         public string Tags_GetById = "/api/Tags/GetById?";
         public string Tags_Save = "/api/Tags/Save";
         public string Tags_Delete = "/api/Tags/Delete?";

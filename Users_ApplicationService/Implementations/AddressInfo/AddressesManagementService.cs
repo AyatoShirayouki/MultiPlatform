@@ -183,8 +183,10 @@ namespace Users_ApplicationService.Implementations.AddressInfo
             }
         }
 
-        public static async Task Save(AddressDTO addressDTO)
+        public static async Task<int> Save(AddressDTO addressDTO)
         {
+            int result = 0;
+
             using (UsersUnitOfWork unitOfWork = new UsersUnitOfWork())
             {
                 unitOfWork.BeginTransaction();
@@ -229,6 +231,9 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                     }
 
                     await addressesRepo.Save(address);
+
+                    result = address.Id;
+
                     unitOfWork.Commit();
                 }
                 else
@@ -236,6 +241,8 @@ namespace Users_ApplicationService.Implementations.AddressInfo
                     unitOfWork.Rollback();
                 }
             }
+
+            return result;
         }
 
         public static async Task<AddressDTO> GetAddress(int countryId, int regionId, int cityId, string addressInfo)

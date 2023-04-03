@@ -5,6 +5,7 @@ using Microsoft.Data.SqlClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,11 +72,15 @@ namespace ScriptExecutor.Executors
 					{
 						connection.Open();
 
+						SqlCommand openingCommand = connection.CreateCommand();
+						openingCommand.CommandType = CommandType.Text;
+						openingCommand.CommandText = "SET IDENTITY_INSERT [dbo].[Cities] ON";
+						openingCommand.ExecuteNonQuery();
+
 						for (int i = 0; i < jsonObject.Count; i++)
 						{
 							// Create a SQL command
-							string sqlCommandText = "SET IDENTITY_INSERT[dbo].[Cities] ON" + "\n" +
-								"INSERT INTO [dbo].[Cities] (id, name, region_id, region_code, country_id, country_code,  latitude, longitude, wikiDataId) " +
+							string sqlCommandText = "INSERT INTO [dbo].[Cities] (id, name, region_id, region_code, country_id, country_code,  latitude, longitude, wikiDataId) " +
 													"VALUES (@id, @name, @region_id, @region_code, @country_id, @country_code, @latitude, @longitude, @wikiDataId)";
 							using (SqlCommand command = new SqlCommand(sqlCommandText, connection))
 							{
@@ -95,7 +100,9 @@ namespace ScriptExecutor.Executors
 							}
 						}
 
-						var closingCommand = new SqlCommand("SET IDENTITY_INSERT [dbo].[Cities] OFF");
+						SqlCommand closingCommand = connection.CreateCommand();
+						closingCommand.CommandType = CommandType.Text;
+						closingCommand.CommandText = "SET IDENTITY_INSERT [dbo].[Cities] OFF";
 						closingCommand.ExecuteNonQuery();
 
 						// Close the connection
@@ -131,11 +138,16 @@ namespace ScriptExecutor.Executors
 					using (SqlConnection connection = new SqlConnection(ConnectionString))
 					{
 						connection.Open();
+
+						SqlCommand openingCommand = connection.CreateCommand();
+						openingCommand.CommandType = CommandType.Text;
+						openingCommand.CommandText = "SET IDENTITY_INSERT [dbo].[Regions] ON";
+						openingCommand.ExecuteNonQuery();
+
 						for (int i = 0; i < data.Count; i++)
 						{
 							// Define the SQL command
-							string sql = "SET IDENTITY_INSERT [dbo].[Regions] ON" + "\n" +
-								"INSERT INTO [dbo].[Regions] (id, name, country_id, state_code, country_code, type, latitude, longitude) " +
+							string sql = "INSERT INTO [dbo].[Regions] (id, name, country_id, state_code, country_code, type, latitude, longitude) " +
 										 "VALUES (@id, @name, @country_id, @state_code, @country_code, @type, @latitude, @longitude)";
 							SqlCommand command = new SqlCommand(sql, connection);
 
@@ -153,7 +165,9 @@ namespace ScriptExecutor.Executors
 							command.ExecuteNonQuery();
 						}
 
-						var closingCommand = new SqlCommand("SET IDENTITY_INSERT [dbo].[Regions] OFF");
+						SqlCommand closingCommand = connection.CreateCommand();
+						closingCommand.CommandType = CommandType.Text;
+						closingCommand.CommandText = "SET IDENTITY_INSERT [dbo].[Regions] OFF";
 						closingCommand.ExecuteNonQuery();
 
 						// Close the connection
@@ -194,11 +208,17 @@ namespace ScriptExecutor.Executors
 						// Open the connection
 						connection.Open();
 
+						SqlCommand openingCommand = connection.CreateCommand();
+						openingCommand.CommandType = CommandType.Text;
+						openingCommand.CommandText = "SET IDENTITY_INSERT [dbo].[Countries] ON";
+						openingCommand.ExecuteNonQuery();
+
 						for (int i = 0; i < country.Count; i++)
 						{
 							// Create a command to insert the data into the database
-							var command = new SqlCommand("SET IDENTITY_INSERT [dbo].[Countries] ON" + "\n" +
-								"INSERT INTO countries (id, name, iso3, iso2, numeric_code, phonecode, capital, currency, currency_name, currency_symbol, tld, native, region, subregion, timezones, translations, latitude, longitude, emoji, emojiU) VALUES (@id, @name, @iso3, @iso2, @numeric_code, @phonecode, @capital, @currency, @currency_name, @currency_symbol, @tld, @native, @region, @subregion, @timezones, @translations, @latitude, @longitude, @emoji, @emojiU)", connection);
+							var command = new SqlCommand("INSERT INTO countries " +
+								"(id, name, iso3, iso2, numeric_code, phonecode, capital, currency, currency_name, currency_symbol, tld, native, region, subregion, timezones, translations, latitude, longitude, emoji, emojiU) " +
+								"VALUES (@id, @name, @iso3, @iso2, @numeric_code, @phonecode, @capital, @currency, @currency_name, @currency_symbol, @tld, @native, @region, @subregion, @timezones, @translations, @latitude, @longitude, @emoji, @emojiU)", connection);
 
 							// Set the parameters of the command
 							command.Parameters.AddWithValue("@id", country[i].Id);
@@ -226,7 +246,9 @@ namespace ScriptExecutor.Executors
 							command.ExecuteNonQuery();
 						}
 
-						var closingCommand = new SqlCommand("SET IDENTITY_INSERT [dbo].[Countries] OFF");
+						SqlCommand closingCommand = connection.CreateCommand();
+						closingCommand.CommandType = CommandType.Text;
+						closingCommand.CommandText = "SET IDENTITY_INSERT [dbo].[Countries] OFF";
 						closingCommand.ExecuteNonQuery();
 
 						// Close the connection
